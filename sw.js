@@ -21,7 +21,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const CACHE  = 'sifee-v1.0.0';   /* 2026-11-09 신규 */
+const CACHE  = 'sifee-v1.0.1';   /* 2026-11-09 인쇄 — 각 장 상 · 하단 굵은 선 (종전 v1.0.0 신규) */
 const ORPHAN = [];
 const ASSETS = [
   './',

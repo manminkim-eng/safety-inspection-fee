@@ -668,6 +668,11 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
   .a4-page.sif-a4{height:auto!important;}
   .sif-tbl,.a4-calc-tbl{break-inside:auto!important;page-break-inside:auto!important;}
   .a4-sub{break-after:avoid;page-break-after:avoid;}
+  /* v1.0.1 (2026-11-09) — 여러 장 인쇄 시 각 장 최상단 · 최하단에 굵은 갈색 선(화면의 상 · 하단 띠와 같은 6px · #785a28).
+     산출서는 한 상자가 여러 장으로 나뉘므로 상자 위 · 아래 테두리를 장마다 복제(box-decoration-break:clone)하고, 본문 속 띠는 인쇄 때만 숨김(겹침 방지). */
+  .a4-page.sif-a4 .a4-top-bar,.a4-page.sif-a4 .a4-bot-bar{display:none!important;}
+  .a4-page.sif-a4{border:none!important;border-top:6px solid #785a28!important;border-bottom:6px solid #785a28!important;
+    padding:4mm 0 3mm!important;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
 }
 @media(max-width:640px){ .sif-bld .grid-2{grid-template-columns:1fr 1fr;} }
 </style>
@@ -2169,6 +2174,16 @@ function mmToast(msg){
     window.addEventListener('afterprint', function () { printing = false; req(); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+<script id="sif-print-bar">/* v1.0.1 (2026-11-09) — 각 장 상 · 하단 굵은 선 색 유지. 단색 인쇄 모듈(mm-mono-print)은 색 테두리를 회색으로 바꾸지만
+   그 규칙상 8px 이하 공종색 선은 색을 남긴다 → 단색 처리 뒤(beforeprint 나중 등록) 이 선만 갈색으로 되돌리고, 인쇄가 끝나면 지운다. */
+(function(){
+  var P=['border-top-color','border-bottom-color'];
+  function on(){ var a=document.getElementById('a4Page'); if(a) P.forEach(function(p){ a.style.setProperty(p,'#785a28','important'); }); }
+  function off(){ var a=document.getElementById('a4Page'); if(a) P.forEach(function(p){ if(a.style.getPropertyValue(p)==='#785a28'||a.style.getPropertyValue(p)==='rgb(120, 90, 40)') a.style.removeProperty(p); }); }
+  function arm(){ setTimeout(function(){ addEventListener('beforeprint',on); addEventListener('afterprint',off); },0); }
+  if(document.readyState==='complete') arm(); else addEventListener('load',arm);
 })();
 </script>
 <!-- MM-PROJECT:BEGIN v1.2 -->
