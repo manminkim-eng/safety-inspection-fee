@@ -2186,6 +2186,78 @@ function mmToast(msg){
   if(document.readyState==='complete') arm(); else addEventListener('load',arm);
 })();
 </script>
+<script id="sif-print-end">/* v1.0.3 (2026-11-09) — 인쇄 시 서명란(제출 문구 · 날짜 · 작성자)과 꼬리말(버전 문구 · 하단 굵은 선)을 마지막 장 최하단에 붙인다.
+   브라우저 인쇄는 쪽을 스스로 나누므로 인쇄 직전(beforeprint)에만
+   ① 인쇄 규칙을 잠깐 화면에 적용해 본문 높이를 재고 행 단위 쪽 나눔을 흉내 내 장수 N 을 구한 뒤
+   ② 산출서 상자 높이를 N장 꽉 차게(min-height) 잡고 ③ 서명란 + 꼬리말 묶음을 상자 바닥에 고정(position:absolute)하며
+   ④ 같은 높이의 빈칸을 본문 끝에 두어 본문과 겹치지 않게 한다. 본문이 끝난 장에 서명란 자리가 없으면 서명란만 있는 장을 만들지 않고 종전처럼 본문 바로 뒤에 둔다.
+   인쇄가 끝나면(afterprint) 원래대로 되돌린다. 화면 · JPG 저장 무변경. 단색 인쇄 모듈이 beforeprint 때마다 style 을 되돌리므로 매번 처음부터 다시 잡는다. */
+(function(){
+  var MM=96/25.4, PER=261*MM-12-7*MM;   /* 한 장 본문 높이 = 261mm − 위 · 아래 테두리 6px×2 − 안쪽 여백 4+3mm */
+  function printRules(){
+    var out=[];
+    function walk(rs,inPrint){ for(var i=0;i<rs.length;i++){ var r=rs[i];
+      if(r.type===4){ walk(r.cssRules, inPrint || /\bprint\b/.test(r.media.mediaText)); }
+      else if(inPrint && r.type===1){ out.push(r.cssText); } } }
+    for(var i=0;i<document.styleSheets.length;i++){ try{ walk(document.styleSheets[i].cssRules,false); }catch(e){} }
+    return out.join('\n');
+  }
+  function pages(a, w){   /* 인쇄 규칙 흉내 상태에서 본문 끝 위치(쪽 나눔 밀림 포함)를 구한다 */
+    var top=a.getBoundingClientRect().top+(parseFloat(getComputedStyle(a).borderTopWidth)||0)+(parseFloat(getComputedStyle(a).paddingTop)||0);
+    var units=[], pend=null;
+    Array.prototype.forEach.call(a.children,function(el){
+      if(el===w || el.id==='sif-endsp') return;
+      var b=el.getBoundingClientRect(); if(b.height<=0) return;
+      var rows=el.tagName==='TABLE'?[el]:[]; if(!rows.length) rows=Array.prototype.slice.call(el.querySelectorAll('table'));
+      var list=[];
+      if(rows.length){ rows.forEach(function(t){ var th=t.tHead?t.tHead.getBoundingClientRect().height:0;
+          Array.prototype.forEach.call(t.querySelectorAll('tbody > tr, :scope > tr, tfoot > tr'),function(tr){ var q=tr.getBoundingClientRect(); list.push({t:q.top-top,b:q.bottom-top,th:th}); });
+          if(t.tHead){ var q=t.tHead.getBoundingClientRect(); list.unshift({t:q.top-top,b:q.bottom-top,th:0,head:1}); } });
+        list.sort(function(x,y){return x.t-y.t;});
+        if(list.length && list[0].t-(b.top-top)>1) list.unshift({t:b.top-top,b:list[0].t,th:0});
+      } else list=[{t:b.top-top,b:b.bottom-top,th:0,brk:b.height>48}];   /* 여러 줄 글(주석 · 법령 상자)은 브라우저가 줄 단위로 나눈다 */
+      if(pend){ list[0]={t:pend.t,b:list[0].b,th:list[0].th}; pend=null; }
+      if(el.classList.contains('a4-sub')){ pend=list[0]; return; }
+      for(var i=0;i<list.length;i++){ if(list[i].head && list[i+1]){ list[i+1]={t:list[i].t,b:list[i+1].b,th:list[i+1].th}; continue; } units.push(list[i]); }
+    });
+    if(pend) units.push(pend);
+    var shift=0, pe=PER;
+    units.forEach(function(u){ var t=u.t+shift, b=u.b+shift;
+      while(t>=pe) pe+=PER;
+      if(b>pe+0.5 && (b-t)<=PER && !u.brk){ var d=pe-t+(u.th||0); shift+=d; b+=d; pe+=PER; }
+      while(b>pe) pe+=PER; });
+    return (w.getBoundingClientRect().top-top)+shift;
+  }
+  function on(){
+    off();
+    var a=document.getElementById('a4Page'); if(!a) return;
+    var sg=a.querySelector(':scope > .a4-sign'), ft=a.querySelector(':scope > .a4-footer'); if(!sg||!ft) return;
+    var w=document.createElement('div'); w.id='sif-endblk';
+    a.insertBefore(w,sg); w.appendChild(sg); w.appendChild(ft);
+    var sim=document.createElement('style'); sim.id='sif-psim';
+    sim.textContent=printRules()+'\n#a4Page{width:'+(184*MM).toFixed(2)+'px!important;}#a4ScaleWrap{transform:none!important;}';
+    document.head.appendChild(sim);
+    var h=w.getBoundingClientRect().height+14, end=pages(a,w), n=Math.max(1,Math.ceil(end/PER));
+    sim.remove();
+    /* 본문이 끝난 장에 서명란이 들어갈 자리가 없으면(장이 거의 꽉 참) 서명란만 있는 빈 장을 만들지 않고 종전처럼 본문 바로 뒤에 둔다 */
+    if(end+h>n*PER-4){ while(w.firstChild) a.insertBefore(w.firstChild,w); w.remove(); return; }
+    var sp=document.createElement('div'); sp.id='sif-endsp'; a.appendChild(sp);
+    a.style.setProperty('position','relative','important');
+    a.style.setProperty('box-sizing','content-box','important');
+    a.style.setProperty('min-height',(n*PER-2).toFixed(1)+'px','important');
+    w.style.cssText='position:absolute;left:0;right:0;bottom:3mm;';
+    sp.style.cssText='height:'+h.toFixed(1)+'px;break-inside:avoid;page-break-inside:avoid;';
+  }
+  function off(){
+    var a=document.getElementById('a4Page'), w=document.getElementById('sif-endblk'), sp=document.getElementById('sif-endsp'), sim=document.getElementById('sif-psim');
+    if(w){ while(w.firstChild) w.parentNode.insertBefore(w.firstChild,w); w.remove(); }
+    if(sp) sp.remove(); if(sim) sim.remove();
+    if(a) ['position','box-sizing','min-height'].forEach(function(p){ a.style.removeProperty(p); });
+  }
+  function arm(){ setTimeout(function(){ addEventListener('beforeprint',on); addEventListener('afterprint',off); },0); }
+  if(document.readyState==='complete') arm(); else addEventListener('load',arm);
+})();</script>
+
 <!-- MM-PROJECT:BEGIN v1.2 -->
 <script id="mm-project-js" data-tool="안전대가" data-pos="bottom:110px;right:18px" data-map="{&quot;사업명&quot;:&quot;#projectName&quot;,&quot;위치&quot;:&quot;#siteLoc&quot;,&quot;발주처&quot;:&quot;#client&quot;,&quot;작성자&quot;:&quot;#author&quot;,&quot;연면적&quot;:&quot;#b0-area&quot;,&quot;지상층&quot;:&quot;-&quot;,&quot;지하층&quot;:&quot;-&quot;,&quot;높이&quot;:&quot;-&quot;,&quot;구조&quot;:&quot;-&quot;}">
 /* MANMIN 공통 건물개요 원본 manmin-project.js v1.2 (2026-11-09, 작업지시서 §25-6-52 · v1.1 §25-6-51 · v1.0 §25-6-50)
