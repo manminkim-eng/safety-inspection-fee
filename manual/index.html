@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>안전점검등 대가 산출기 사용자 매뉴얼 Ver-1.0 · MANMIN</title>
+<meta name="description" content="안전점검등 대가 산출기(건축물) MANMIN Ver-1.0 사용자 매뉴얼 — 화면 기능, 기술기준(시설물안전법 제37조, 고시 제2026-444호 제55조~제63조 · 별표 21~27 정액적산방식), 실무 작업 방법">
+<meta name="author" content="김만민 건축사 · ㈜대성건축사사무소">
+<meta name="theme-color" content="#785a28"><meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="./assets/fonts/manmin-fonts.css">
+<style>:root{--mh-a:#14110b;--mh-b:#785a28;--mh-c:#8f6b2e;--mh-accent:#f1cd7c;--mh-shadow:rgba(120,90,40,.35);--mh-btn-ink:#785a28;--mh-veil:0.25;--mh-bp:50%}
+
+:root{
+  --navy:#2D3A8C;--navy-d:#1F2A6B;--navy-l:#E9ECF8;--accent:#F4A261;--accent-d:#C97A3A;--accent-l:#FDF1E7;
+  --bg:#F8F9FA;--card:#FFFFFF;--text:#1A1A2E;--text2:#4A4F66;--line:#DDE1EA;--ok:#0F766E;--ng:#B42318;
+  --r:12px;--pad:24px;--shadow:0 4px 20px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--navy)}a:hover{color:var(--accent-d)}
+code,kbd,.mono{font-family:var(--font-mono);font-size:.9em}
+code{background:var(--navy-l);color:var(--navy-d);padding:1px 6px;border-radius:5px}
+kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;background:#fff}
+/* 상단 */
+.top{position:relative;background:linear-gradient(135deg,var(--mh-a),var(--mh-b) var(--mh-bp),var(--mh-c));color:#fff;box-shadow:0 2px 20px var(--mh-shadow)}
+.top::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--mh-veil));pointer-events:none}
+.top-in{position:relative;max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;padding:40px 24px 32px}
+.eyebrow{font-family:var(--font-brand);font-weight:700;font-size:12px;letter-spacing:.18em;color:var(--mh-accent)}
+.top h1{font-size:28px;font-weight:900;margin:8px 0 6px;line-height:1.35}
+.top .sub{opacity:.9;margin:0}
+.mh-main{flex:1 1 640px;min-width:0}
+.mh-eb{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mh-ver{font:700 11px var(--font-brand);background:var(--mh-accent);color:#1A1A2E;border-radius:999px;padding:1px 10px}
+.mh-meta{margin:12px 0 0;font-size:13px;color:rgba(255,255,255,.9)}
+.mh-act{display:flex;gap:10px;flex-wrap:wrap}
+.mh-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:10px;font-size:15px;text-decoration:none}
+.mh-btn.pri{background:#fff;color:var(--mh-btn-ink);font-weight:700}
+.mh-btn.sec{border:1px solid rgba(255,255,255,.45);color:#fff}
+.mh-btn.pri:hover{background:var(--mh-accent);color:#1A1A2E}.mh-btn.sec:hover{background:rgba(255,255,255,.12);color:#fff}
+.mh-btn:focus-visible{outline:3px solid var(--mh-accent);outline-offset:2px}
+.mh-prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:50;pointer-events:none}
+.mh-prog i{display:block;height:100%;width:0;background:var(--mh-accent)}
+.toc-sum{display:none}
+/* 레이아웃 */
+.wrap{max-width:1240px;margin:0 auto;padding:28px 24px 80px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px}
+nav.toc{position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow:auto;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 16px;font-size:14px}
+nav.toc h2{font-size:13px;letter-spacing:.12em;color:var(--text2);margin:0 0 8px}
+nav.toc ol{list-style:none;margin:0;padding:0}
+nav.toc li a{display:block;padding:5px 8px;border-radius:8px;text-decoration:none;color:var(--text)}
+nav.toc li a:hover,nav.toc li a.on{background:var(--navy-l);color:var(--navy)}
+nav.toc li.sub a{padding-left:20px;font-size:13px;color:var(--text2)}
+main{min-width:0}
+section.ch{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:var(--pad) calc(var(--pad) + 8px);margin-bottom:28px}
+section.ch>h2{font-size:24px;font-weight:700;color:var(--navy);margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
+section.ch>h2 .n{font-family:var(--font-brand);font-weight:700;font-size:14px;color:#fff;background:var(--navy);border-radius:8px;padding:2px 9px}
+section.ch>.lead{color:var(--text2);margin:0 0 18px}
+h3{font-size:19px;color:var(--navy-d);margin:34px 0 10px;padding-top:6px;border-top:1px solid var(--line)}
+h3:first-of-type{border-top:0}
+h4{font-size:16px;margin:22px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px}
+.note,.tip,.warn{border-radius:10px;padding:12px 16px;margin:14px 0;font-size:15px}
+.note{background:var(--navy-l);border-left:4px solid var(--navy)}
+.tip{background:var(--accent-l);border-left:4px solid var(--accent)}
+.warn{background:#FEF3F2;border-left:4px solid var(--ng)}
+.note b:first-child,.tip b:first-child,.warn b:first-child{margin-right:6px}
+/* 표 */
+.tbl{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;background:#fff}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--navy-l);color:var(--navy-d);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:var(--font-mono);white-space:nowrap}
+.ok{color:var(--ok);font-weight:700}.ng{color:var(--ng);font-weight:700}
+/* 그림 */
+figure.shot{margin:18px 0 26px}
+figure.shot .frame{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in}
+figure.shot img{display:block;width:100%;height:auto}
+figure.narrow{max-width:420px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--accent);color:#1A1A2E;font:700 13px/26px var(--font-mono);text-align:center;box-shadow:0 0 0 3px #fff,0 2px 8px rgba(0,0,0,.35);pointer-events:none}
+figcaption{font-size:14px;color:var(--text2);margin-top:8px}
+.fno{font-family:var(--font-mono);font-size:11px;background:var(--navy);color:#fff;border-radius:6px;padding:1px 7px;margin-right:8px}
+ol.legend{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px 16px;font-size:14px}
+ol.legend li{display:flex;gap:8px;align-items:flex-start}
+ol.legend b{flex:0 0 22px;height:22px;border-radius:50%;background:var(--accent);font:700 12px/22px var(--font-mono);text-align:center}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+/* 단계 */
+.steps{counter-reset:st;list-style:none;padding:0;margin:16px 0}
+.steps>li{counter-increment:st;position:relative;padding:4px 0 18px 54px;border-left:2px solid var(--line);margin-left:18px}
+.steps>li:last-child{border-left-color:transparent}
+.steps>li::before{content:counter(st);position:absolute;left:-19px;top:0;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font:700 15px/36px var(--font-mono);text-align:center;box-shadow:0 0 0 4px var(--bg)}
+.steps>li>b.t{display:block;font-size:17px;color:var(--navy-d);margin-bottom:2px}
+/* 수식 */
+.eq{font-family:var(--font-mono);background:#0F1630;color:#E8ECFF;border-radius:10px;padding:14px 18px;margin:12px 0;overflow-x:auto;font-size:14px;line-height:1.9;white-space:pre}
+.eq .c{color:#9AA6D6}
+.svgbox{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;margin:14px 0;overflow-x:auto}
+.svgbox svg{display:block;width:100%;min-width:640px;height:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:14px 0}
+.card{border:1px solid var(--line);border-radius:var(--r);padding:16px;background:#fff}
+.card h5{margin:0 0 4px;font-size:15px;color:var(--navy)}
+.card p{margin:0;font-size:14px;color:var(--text2)}
+footer.foot{max-width:1240px;margin:0 auto;padding:0 24px 40px;color:var(--text2);font-size:13px}
+/* 라이트박스 */
+#lb{position:fixed;inset:0;background:rgba(10,14,30,.88);display:none;align-items:center;justify-content:center;z-index:99;cursor:zoom-out;padding:16px}
+#lb.open{display:flex}#lb img{max-width:100%;max-height:100%;border-radius:8px;background:#fff}
+.totop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:0;font-size:18px;box-shadow:var(--shadow);cursor:pointer}
+/* 반응형 5단계 */
+@media (max-width:1240px){.wrap{grid-template-columns:230px minmax(0,1fr);gap:24px}}
+@media (max-width:1024px){.wrap{grid-template-columns:1fr}nav.toc{position:static;max-height:none}nav.toc ol{columns:2}}
+@media (max-width:760px){.pair{grid-template-columns:1fr}section.ch{padding:20px 18px}.top h1{font-size:24px}}
+@media (max-width:640px){nav.toc ol{columns:1}body{font-size:15px}}
+@media (max-width:480px){.wrap,.top-in{padding-left:16px;padding-right:16px}.pin{width:22px;height:22px;font-size:11px;line-height:22px}}
+@media (max-width:400px){section.ch>h2{font-size:20px}}
+/* v-mh1 D4 접이식 목차 · D9 터치 44px (≤1024px) */
+@media (max-width:1024px){
+  nav.toc{padding:0 16px}
+  nav.toc .toc-sum{display:flex;align-items:center;justify-content:space-between;min-height:48px;font-weight:700;font-size:14px;color:var(--navy);cursor:pointer;list-style:none}
+  nav.toc .toc-sum::-webkit-details-marker{display:none}
+  nav.toc details:not([open]) ol,nav.toc details:not([open]) h2{display:none}
+  nav.toc details[open]{padding-bottom:12px}
+  nav.toc li a{display:flex;align-items:center;min-height:44px;padding:0 8px}
+}
+/* v-mh1 D5 좁은 화면 헤드 */
+@media (max-width:640px){
+  .top-in{padding:28px 16px 24px;gap:16px}.top h1{font-size:22px}.top .sub{font-size:13px}.mh-meta{font-size:12px}
+  .mh-act{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.mh-btn{padding:0 8px;font-size:14px}
+}
+@media (max-width:480px){.eyebrow{letter-spacing:.04em}.mh-eb{gap:8px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* A4 인쇄 */
+@page{size:A4;margin:14mm 12mm 14mm}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff;font-size:10.5pt}
+  nav.toc,.totop,#lb{display:none!important}
+  .wrap{display:block;padding:0}
+  section.ch{box-shadow:none;padding:0 0 8mm;margin:0;break-before:page}
+  main{padding-bottom:8mm}
+  section.ch:first-of-type{break-before:auto}
+  figure.shot,.tbl,.eq,.svgbox,.note,.tip,.warn,.steps>li{break-inside:avoid}
+  h3,h4{break-after:avoid}
+  .top{border-radius:0;box-shadow:none}
+  .mh-prog,.mh-act{display:none!important}
+  .mh-meta{color:#fff}
+  .pfoot{position:fixed;bottom:0;left:0;right:0;height:6mm;background:#fff;font-size:8pt;color:#666;border-top:1px solid #ccc;padding-top:1.5mm;display:flex;justify-content:space-between}
+}
+.pfoot{display:none}
+@media print{.pfoot{display:flex}}
+/* ── 좁은 화면 대응(r1 · 2026-10-12) : 화면 전용 — 인쇄·PDF에는 영향 없음 ── */
+@media screen and (max-width:640px){
+  .k1 td:first-child,.k1 th:first-child{white-space:normal}
+  /* 글 표(숫자 칸 없는 표) → 행마다 카드로 쌓기 */
+  .tbl.stack{border:0;border-radius:0;overflow:visible}
+  .tbl.stack table,.tbl.stack tbody,.tbl.stack tr,.tbl.stack td{display:block;width:auto}
+  .tbl.stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .tbl.stack table{background:transparent}
+  .tbl.stack tr{border:1px solid var(--line);border-radius:10px;background:#fff;margin:0 0 10px;overflow:hidden}
+  .tbl.stack td{border-bottom:1px solid var(--line);padding:8px 12px}
+  .tbl.stack tr td:last-child{border-bottom:0}
+  .tbl.stack td:first-child{background:var(--navy-l);color:var(--navy-d);font-weight:700}
+  .tbl.stack td[data-th]:not(:first-child)::before{content:attr(data-th);display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:2px}
+  .tbl.stack.c2 td[data-th]:not(:first-child)::before{display:none}
+  .tbl.stack td:empty{display:none}
+  /* 숫자 표 → 표 모양 유지, 글자·여백 축소, 넘치면 좌우로 밀기(오른쪽 그림자로 표시) */
+  .tbl:not(.stack){background:linear-gradient(to right,#fff 30%,rgba(255,255,255,0)) left/40px 100% no-repeat local,linear-gradient(to left,#fff 30%,rgba(255,255,255,0)) right/40px 100% no-repeat local,radial-gradient(farthest-side at 100% 50%,rgba(26,26,46,.22),transparent) right/12px 100% no-repeat scroll,#fff}
+  .tbl:not(.stack) table{font-size:13px;background:transparent}
+  .tbl:not(.stack) th,.tbl:not(.stack) td{padding:7px 8px}
+  /* 수식 → 줄바꿈 허용 */
+  .eq{white-space:pre-wrap;word-break:keep-all;font-size:13px;line-height:1.75;padding:12px 14px}
+  .eq .c{display:block;padding-left:1em}
+  .svgbox{position:relative}
+  .svgbox::after{content:"← 좌우로 밀어서 보기 →";display:block;text-align:center;font-size:12px;color:var(--text2);margin-top:6px;position:sticky;left:0}
+  ol.legend{grid-template-columns:1fr}
+  .steps>li{padding-left:34px;margin-left:14px}
+}
+.rev{white-space:nowrap}
+@media print{.rev{display:none}}
+/* v-mh1 D6 다크 모드(화면 전용 · 헤드 색 불변 · 그림과 흐름도는 흰 바탕 유지) */
+@media screen and (prefers-color-scheme:dark){
+  :root{--bg:#0F1420;--card:#171D2C;--text:#E6E8EF;--text2:#A9AFC3;--line:#2A3245;--navy-l:#232B45;--accent-l:#33281D;--shadow:0 4px 20px rgba(0,0,0,.35)}
+  a,section.ch>h2,h3,.steps>li>b.t,.card h5,nav.toc li a.on,nav.toc .toc-sum{color:#AEB8F5}
+  a:hover{color:#F4A261}
+  code{background:var(--navy-l);color:#C9D0FA}
+  kbd{background:var(--card);color:var(--text)}
+  table,.card,nav.toc,section.ch{background:var(--card)}
+  th{background:var(--navy-l);color:#C9D0FA}
+  .note{border-left-color:#7F8CE0}
+  .warn{background:#3A1F22}
+  .ok{color:#5EEAD4}.ng{color:#FDA29B}
+  figure.shot .frame,.svgbox{background:#fff;border-color:var(--line)}
+  .tbl.stack tr{background:var(--card)}
+  .tbl.stack td:first-child{color:#C9D0FA}
+  .tbl:not(.stack){background:var(--card)}
+}
+@media screen and (prefers-color-scheme:dark) and (max-width:640px){
+  .tbl:not(.stack){background:linear-gradient(to right,var(--card) 30%,rgba(23,29,44,0)) left/40px 100% no-repeat local,linear-gradient(to left,var(--card) 30%,rgba(23,29,44,0)) right/40px 100% no-repeat local,radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.5),transparent) right/12px 100% no-repeat scroll,var(--card)}
+}
+</style>
+</head><body>
+<div class="mh-prog" aria-hidden="true"><i></i></div>
+<header class="top"><div class="top-in">
+<div class="mh-main">
+<div class="mh-eb"><span class="eyebrow">MANMIN ENGINEERING · USER MANUAL</span><span class="mh-ver">Ver-1.0</span></div>
+<h1>안전점검등 대가 산출기 사용자 매뉴얼</h1>
+<p class="sub">과업 · 동별 연면적 입력 → 기준인원수 보간 · 군집 · 직접경비 · 보정 자동 산출 → A4 산출서 출력</p>
+<p class="mh-meta">2026-11-09 · 김만민 건축사 · ㈜대성건축사사무소 · 시설물안전법 제37조 · 고시 제2026-444호</p>
+</div>
+<div class="mh-act"><a class="mh-btn pri" href="../index.html" aria-label="안전점검등 대가 산출기 열기">▶ 산출기 열기</a><a class="mh-btn sec" href="SIF_사용자매뉴얼_Ver-1.0.pdf" download>⤓ PDF (A4)</a></div>
+</div></header>
+<div class="wrap"><nav class="toc" aria-label="목차"><details open><summary class="toc-sum">목차 <span aria-hidden="true">▾</span></summary><h2>목차</h2><ol><li><a href="#ch0">0. 이 매뉴얼에 대하여</a></li><li><a href="#ch1">1. 한눈에 보기</a></li><li class="sub"><a href="#s1-1">화면 구성</a></li><li class="sub"><a href="#s1-2">작업 탭·근거 표시</a></li><li class="sub"><a href="#s1-3">설치·보관·매뉴얼</a></li><li><a href="#ch2">2. 3분 따라하기</a></li><li><a href="#ch3">3. 화면별 기능 상세</a></li><li class="sub"><a href="#s3-1">용역 정보</a></li><li class="sub"><a href="#s3-2">과업 구분·노임단가</a></li><li class="sub"><a href="#s3-3">대상 건축물(동별)</a></li><li class="sub"><a href="#s3-4">산출 요율 설정</a></li><li class="sub"><a href="#s3-5">직접경비</a></li><li class="sub"><a href="#s3-6">대가 보정</a></li><li class="sub"><a href="#s3-7">선택과업</a></li><li class="sub"><a href="#s3-8">합계·계약 확인</a></li><li class="sub"><a href="#s3-9">요약 스트립·견적금액</a></li><li class="sub"><a href="#s3-10">산출서 미리보기·출력</a></li><li class="sub"><a href="#s3-11">A4 산출서 구성</a></li><li class="sub"><a href="#s3-12">법적 근거·기준표 탭</a></li><li class="sub"><a href="#s3-13">계산식 안내 창</a></li><li class="sub"><a href="#s3-14">모바일</a></li><li><a href="#ch4">4. 기술기준 해설</a></li><li class="sub"><a href="#s4-1">근거 법령과 고시</a></li><li class="sub"><a href="#s4-2">대가의 구성</a></li><li class="sub"><a href="#s4-3">기준인원수(별표 22)</a></li><li class="sub"><a href="#s4-4">보간(별표 24)</a></li><li class="sub"><a href="#s4-5">조정비(별표 23)</a></li><li class="sub"><a href="#s4-6">군집시설물(별표 27)</a></li><li class="sub"><a href="#s4-7">인건비·제경비·기술료</a></li><li class="sub"><a href="#s4-8">직접경비(별표 25)</a></li><li class="sub"><a href="#s4-9">대가 보정(제62조)</a></li><li class="sub"><a href="#s4-10">선택과업(별표 26)</a></li><li class="sub"><a href="#s4-11">70% 기준(제63조)</a></li><li class="sub"><a href="#s4-12">노임단가</a></li><li class="sub"><a href="#s4-13">반올림·절사</a></li><li class="sub"><a href="#s4-14">다루지 않는 것</a></li><li><a href="#ch5">5. 실무 작업 방법</a></li><li class="sub"><a href="#s5-1">단계별 절차</a></li><li class="sub"><a href="#s5-2">제출 전 확인</a></li><li class="sub"><a href="#s5-3">예제 B — 군집 5개동</a></li><li><a href="#ch6">6. 문제 해결·FAQ</a></li><li><a href="#ch7">부록</a></li><li class="sub"><a href="#a1">예제 입력값</a></li><li class="sub"><a href="#a2">버전 변경 내역</a></li><li class="sub"><a href="#a3">용어</a></li></ol></details></nav><main><style>
+#fig-s03_project,#fig-s04_task,#fig-s05_bld,#fig-s06_rate,#fig-s07_direct,#fig-s08_corr,#fig-s09_opt,#fig-s10_total{max-width:620px}
+#fig-s16_var_bld{max-width:420px}
+#fig-s13_a4page,#fig-s17_var_a4page{max-width:560px}
+#fig-s18_help_howto,#fig-s19_help_method,#fig-s20_help_formula,#fig-s21_help_caution{max-width:640px}
+.k1 td:first-child,.k1 th:first-child{white-space:nowrap}
+.nw{white-space:nowrap}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+@media (max-width:760px){.tri{grid-template-columns:1fr}}
+@media print{
+  figure.shot{max-width:none!important}
+  figure.shot .frame{width:fit-content;max-width:100%}
+  figure.shot img{width:auto;height:auto;max-width:100%;max-height:118mm}
+  #fig-s13_a4page img,#fig-s17_var_a4page img,#fig-s14_reference img,#fig-s16_var_bld img{max-height:175mm}
+  #fig-s18_help_howto img,#fig-s19_help_method img,#fig-s20_help_formula img,#fig-s21_help_caution img{max-height:130mm}
+  figure.narrow img{max-height:105mm}
+  .pair{grid-template-columns:1fr 1fr}.tri{grid-template-columns:repeat(3,1fr)}
+  .brk .tbl{break-inside:auto}.brk tr{break-inside:avoid}.brk thead{display:table-header-group}
+}
+</style><section class="ch" id="ch0"><h2><span class="n">00</span>이 매뉴얼에 대하여</h2>
+<p class="lead">안전점검등 대가 산출기(건축물)는 동별 연면적·구조형식·용도를 넣으면 「시설물의 안전 및 유지관리 실시 등에 관한 지침」의 정액적산방식으로 정기안전점검·정밀안전점검·정밀안전진단·성능평가 대가를 계산하고, 산출근거가 붙은 A4 산출서로 출력하는 웹 계산도구입니다. 관리주체 담당자와 안전진단 실무자가 화면 순서대로 따라 하며 대가를 산출할 수 있도록 작성했습니다.</p>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">내용</th></tr></thead><tbody><tr><td class="">대상 프로그램</td><td class="">안전점검등 대가 산출기 (건축물) <b>MANMIN Ver-1.0</b> (v1.0.4) — 탭 막대 「📘 매뉴얼」 버튼으로 이 문서가 열립니다</td></tr><tr><td class="">접속 주소</td><td class=""><a href="https://manminkim-eng.github.io/safety-inspection-fee/" target="_blank" rel="noopener">manminkim-eng.github.io/safety-inspection-fee</a></td></tr><tr><td class="">근거</td><td class="">시설물의 안전 및 유지관리에 관한 특별법(2026.8.28. 시행) 제37조 · 국토교통부고시 제2026-444호(2026.8.21. 시행) 제55조~제63조 · 별표 21~27</td></tr><tr><td class="">적용 단가</td><td class="">엔지니어링 노임단가 고급기술자 310,884원(한국엔지니어링협회, 2026.1.1. 적용) · 특별인부 시중노임 228,717원(대한건설협회, 2026.9.1. 적용)</td></tr><tr><td class="">예제</td><td class="">A = 앱 초기값(정기안전점검 · 1개동 3,500㎡) → 견적금액 4,420,000원 · B = 정밀안전점검 · 군집 5개동 → 54,300,000원</td></tr><tr><td class="">기준 시점</td><td class="">2026-11-09 — 화면 캡처 날짜 고정</td></tr></tbody></table></div></div>
+<div class="note"><b>표기</b>그림 위 주황색 번호(①②…)는 그림 아래 범례 번호와 같습니다. 그림을 누르면 크게 볼 수 있습니다. 버튼 이름은 「인쇄 / PDF 저장」처럼 낫표로 적었습니다.</div>
+<div class="warn"><b>책임 한계</b>본 도구는 고시의 산정기준으로 기준 대가를 계산하는 보조 프로그램입니다. 안전점검등의 실시 대상·시기, 군집시설물 해당 여부, 구조 복잡도 보정 폭, 선택과업 범위는 관리주체와 수행기관이 정하는 값이며 프로그램이 판정하지 않습니다. 건축물 외의 시설물(교량·터널·항만 등)은 다루지 않습니다(<a href="#s4-14">4-14</a>). 계약 금액은 고시 원문으로 확정하십시오.</div>
+</section>
+<section class="ch" id="ch1"><h2><span class="n">01</span>한눈에 보기</h2>
+<p class="lead">설치 없이 브라우저에서 바로 실행되는 단일 페이지 앱(PWA)입니다. 입력은 내 PC 브라우저 안에서만 처리되며 서버로 전송되지 않습니다.</p>
+<div class="cards">
+<div class="card"><h5>무엇을 계산하나</h5><p>과업 9종의 직접인건비·제경비·기술료·직접경비, 보정, 선택과업, 공급가액, 부가가치세, 견적금액</p></div>
+<div class="card"><h5>자동으로 정해지는 값</h5><p>연면적별 기준인원수(보간), 조정비, 군집 계수, 여비 인원, 기계손료율, 경과년수 보정, 차량 대수·외업 일수</p></div>
+<div class="card"><h5>근거</h5><p>시설물안전법 제37조 · 국토교통부고시 제2026-444호(2026.8.21. 시행) 제55조~제62조 · 별표 21~27</p></div>
+<div class="card"><h5>출력</h5><p>A4 안전점검등 대가 산출서 — 총괄표와 산출근거 1~5(인쇄·PDF·JPG)</p></div>
+</div>
+<div class="svgbox"><svg viewBox="0 0 900 210" role="img" aria-label="안전점검등 대가 산출 흐름: 동별 연면적으로 기준인원수를 보간하고 조정비와 군집 계수를 곱해 적용 인원을 구한 뒤, 고급기술자 노임단가를 곱해 직접인건비를 구하고 제경비, 기술료, 직접경비를 더해 기본과업비를 만든다. 기본과업비에 보정비를 곱하고 선택과업비를 더해 공급가액을 구하며 부가가치세를 더해 절사한다">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2D3A8C"/></marker></defs>
+<style>.b{fill:#E9ECF8;stroke:#2D3A8C;stroke-width:1.5}.o{fill:#FDF1E7;stroke:#C97A3A;stroke-width:1.5}.t{font:600 14px 'Noto Sans KR','Noto Sans KR Local',sans-serif;fill:#1A1A2E}.s{font:12px 'Noto Sans KR','Noto Sans KR Local',sans-serif;fill:#4A4F66}.l{stroke:#2D3A8C;stroke-width:1.6;fill:none;marker-end:url(#ar)}</style>
+<rect class="b" x="10" y="40" width="200" height="110" rx="10"/><text class="t" x="24" y="70">① 적용 인원</text><text class="s" x="24" y="94">별표 22 기준인원수 보간</text><text class="s" x="24" y="114">× 조정비(별표 23)</text><text class="s" x="24" y="134">× 군집 계수(별표 27)</text>
+<rect class="b" x="240" y="40" width="200" height="110" rx="10"/><text class="t" x="254" y="70">② 기본과업비</text><text class="s" x="254" y="94">인건비 = 인원 × 노임단가</text><text class="s" x="254" y="114">+ 제경비 + 기술료</text><text class="s" x="254" y="134">+ 직접경비(별표 25)</text>
+<rect class="b" x="470" y="40" width="200" height="110" rx="10"/><text class="t" x="484" y="70">③ 보정 · 선택과업</text><text class="s" x="484" y="94">× 보정비(제62조)</text><text class="s" x="484" y="114">+ 선택과업비(별표 26)</text><text class="s" x="484" y="134">= 공급가액</text>
+<rect class="o" x="700" y="40" width="190" height="110" rx="10"/><text class="t" x="714" y="70">④ 견적금액</text><text class="s" x="714" y="94">+ 부가가치세 10%</text><text class="s" x="714" y="114">만 원 미만 절사</text><text class="s" x="714" y="134">(절사 단위 선택)</text>
+<path class="l" d="M210,95 L238,95"/><path class="l" d="M440,95 L468,95"/><path class="l" d="M670,95 L698,95"/>
+<text class="s" x="16" y="186">정액적산방식(고시 제55조): 대가 = 기본과업비(직접인건비 + 제경비 + 기술료 + 직접경비) + 선택과업비</text>
+</svg></div>
+<h3 id="s1-1">1-1. 화면 구성</h3>
+<figure class="shot" id="fig-s01_overview"><div class="frame"><img src="images/s01_overview.webp" width="1440" height="900" loading="lazy" alt="전체 화면 — 산출 입력 탭"><span class="pin" style="left:5.26%;top:13.49%">1</span><span class="pin" style="left:1.50%;top:18.82%">2</span><span class="pin" style="left:13.32%;top:25.27%">3</span><span class="pin" style="left:13.32%;top:33.86%">4</span><span class="pin" style="left:13.32%;top:47.51%">5</span><span class="pin" style="left:50.96%;top:47.51%">6</span><span class="pin" style="left:94.15%;top:90.29%">7</span></div><figcaption><span class="fno">S01</span>전체 화면 — 산출 입력 탭</figcaption><ol class="legend"><li><b>1</b><span>작업 탭: 산출 입력 · 산출서 미리보기 · 법적 근거·기준표 · 매뉴얼</span></li><li><b>2</b><span>요약 스트립: 과업·연면적·적용인원·기본과업비·공급가액·견적금액이 입력할 때마다 갱신</span></li><li><b>3</b><span>근거 안내: 시설물안전법 제37조 · 고시 제55조~제62조 · 정액적산방식</span></li><li><b>4</b><span>견적금액 배너: 실시간 견적금액과 공급가액</span></li><li><b>5</b><span>용역 정보: 용역명·관리주체·위치·작성자·작성일 — 산출서 표제로 들어감</span></li><li><b>6</b><span>산출 요율 설정: 제경비율·기술료율</span></li><li><b>7</b><span>오른쪽 아래 버튼: 「건물개요」(다른 도구와 현장 정보 주고받기) · 「계산식 안내」 창</span></li></ol></figure>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">탭</th><th class="">하는 일</th><th class="">본문</th></tr></thead><tbody><tr><td class="">📝 산출 입력</td><td class="">용역 정보, 과업, 동별 건축물, 요율, 직접경비, 보정, 선택과업, 합계 입력과 실시간 결과</td><td class="">3-1~3-9</td></tr><tr><td class="">📄 산출서 미리보기</td><td class="">A4 안전점검등 대가 산출서 미리보기 · 인쇄/PDF · JPG 저장</td><td class="">3-10~3-11</td></tr><tr><td class="">⚖️ 법적 근거·기준표</td><td class="">법적 근거 · 단가 기준 · 별표 22 기준인원수 표 · 별표 23 조정비 · 제62조 보정</td><td class="">3-12</td></tr><tr><td class="">📘 매뉴얼</td><td class="">이 매뉴얼을 새 창으로 엽니다(인터넷 연결 필요)</td><td class="">1-3</td></tr></tbody></table></div></div>
+<h3 id="s1-2">1-2. 작업 탭·근거 표시</h3>
+<figure class="shot" id="fig-s02_tabs"><div class="frame"><img src="images/s02_tabs.webp" width="1440" height="162" loading="lazy" alt="헤더 — 작업 탭과 근거 표시"><span class="pin" style="left:6.93%;top:75.87%">1</span><span class="pin" style="left:14.05%;top:75.87%">2</span><span class="pin" style="left:23.57%;top:75.87%">3</span><span class="pin" style="left:87.77%;top:75.87%">4</span><span class="pin" style="left:84.16%;top:15.33%">5</span></div><figcaption><span class="fno">S02</span>헤더 — 작업 탭과 근거 표시</figcaption><ol class="legend"><li><b>1</b><span>산출 입력</span></li><li><b>2</b><span>산출서 미리보기</span></li><li><b>3</b><span>법적 근거·기준표</span></li><li><b>4</b><span>📘 매뉴얼 — 이 매뉴얼을 새 창으로(탭 막대 오른쪽 끝)</span></li><li><b>5</b><span>근거 법령·고시 표시</span></li></ol></figure>
+<p>헤더 오른쪽에는 근거 법령과 고시 번호, 적용 노임단가 연도가 적혀 있습니다. 고시나 노임단가가 바뀌면 이 표시와 4장 내용을 함께 확인하십시오.</p>
+<h3 id="s1-3">1-3. 설치·보관·매뉴얼</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">내용</th></tr></thead><tbody><tr><td class="">설치(선택)</td><td class="">크롬·엣지 주소창의 설치 아이콘 또는 화면 아래 설치 안내를 누르면 홈 화면·바탕화면에 앱으로 설치됩니다. 아이폰은 사파리 공유 버튼 → 「홈 화면에 추가」</td></tr><tr><td class="">오프라인</td><td class="">한 번 연 뒤에는 인터넷이 끊겨도 계산·출력이 됩니다. 매뉴얼은 인터넷에 연결되어 있을 때만 열립니다(끊겨 있으면 「매뉴얼은 인터넷 연결 시 열립니다」 안내)</td></tr><tr><td class="">입력값 보관</td><td class="">입력값은 저장되지 않습니다. 창을 닫거나 새로 고치면 초기값으로 돌아가므로, 결과는 산출서(PDF·JPG)로 남기십시오. 용역명·위치·발주처·작성자·연면적은 「건물개요」 버튼으로 이 브라우저에 담아 두었다가 다른 MANMIN 도구에서 불러올 수 있습니다</td></tr><tr><td class="">업데이트</td><td class="">새 버전이 올라오면 다음 접속 때 자동으로 바뀝니다. 화면이 예전 그대로면 새로 고침(Ctrl+F5)</td></tr></tbody></table></div></div>
+</section>
+<section class="ch" id="ch2"><h2><span class="n">02</span>3분 따라하기</h2>
+<p class="lead">예제 A(초기값)로 6단계를 따라 하면 견적금액 4,420,000원이 나옵니다. 계산 버튼은 없습니다. 값을 바꾸는 즉시 결과가 바뀝니다.</p>
+<ol class="steps">
+<li><b class="t">과업 고르기</b>「과업 구분 · 노임단가」 카드에서 과업을 고릅니다. 예제는 정기안전점검 — 기계손료율·인쇄비가 과업에 맞게 자동으로 바뀝니다(<a href="#s3-2">3-2</a>).</li>
+<li><b class="t">동별 입력</b>「대상 건축물 (동별)」에 연면적·구조형식·용도·사용승인연도를 넣습니다. 예제는 본관동 3,500㎡ · 철근콘크리트 · 업무용 · 2008년 — 기준 4.3 / 외업 2.3인(<a href="#s3-3">3-3</a>).</li>
+<li><b class="t">요율 · 직접경비</b>제경비율(110~120%)·기술료율(20~40%)을 정하고, 직접경비 카드에는 운임·숙박·인쇄비 같은 실비만 넣습니다. 예제는 110% · 20% · 초기값(<a href="#s3-4">3-4</a>~<a href="#s3-5">3-5</a>).</li>
+<li><b class="t">견적금액 확인</b>견적금액 배너에 <b>₩ 4,420,000</b>, 공급가액 4,024,237원이 표시됩니다. 경과 18년이라 보정비 1.050가 자동으로 곱해졌습니다(<a href="#s3-9">3-9</a>).</li>
+<li><b class="t">산출서 확인</b>「📄 산출서 미리보기」 탭에서 총괄표와 산출근거 1~5를 확인합니다(<a href="#s3-11">3-11</a>).</li>
+<li><b class="t">인쇄·저장</b>「인쇄 / PDF 저장」 또는 「JPG 저장」으로 산출서를 남깁니다(<a href="#s3-10">3-10</a>).</li>
+</ol>
+<div class="tbl"><table><thead><tr><th class="">항목</th><th class="">예제 A 계산</th><th class="num">금액(원)</th></tr></thead><tbody><tr><td class="">1. 직접인건비</td><td class="">4.300인 × 310,884원</td><td class="num">1,336,801</td></tr><tr><td class="">2. 제경비</td><td class="">직접인건비 × 110%</td><td class="num">1,470,481</td></tr><tr><td class="">3. 기술료</td><td class="">(직접인건비 + 제경비) × 20%</td><td class="num">561,456</td></tr><tr><td class="">4. 직접경비</td><td class="">체재비 · 차량 · 보조인부 · 위험수당 · 인쇄비</td><td class="num">463,869</td></tr><tr><td class="">기본과업비(보정 전)</td><td class="">1 + 2 + 3 + 4</td><td class="num">3,832,607</td></tr><tr><td class="">5. 대가 보정</td><td class="">× 1.050 (경과 18년 → 1.05)</td><td class="num">191,630</td></tr><tr><td class="">공급가액</td><td class="">기본과업비(보정 후) + 선택과업비 0</td><td class="num">4,024,237</td></tr><tr><td class="">7. 부가가치세</td><td class="">공급가액 × 10%</td><td class="num">402,423</td></tr><tr><td class="">견적금액</td><td class="">4,426,660 → 만 원 미만 절사</td><td class="num">4,420,000</td></tr></tbody></table></div>
+<div class="tip"><b>확인</b>따라 한 결과가 위 표와 같으면 준비가 끝난 것입니다. 숫자가 다르면 작성일(경과년수 보정에 쓰임)과 노임단가가 초기값에서 바뀌지 않았는지 보십시오.</div>
+</section>
+<section class="ch" id="ch3"><h2><span class="n">03</span>화면별 기능 상세</h2>
+<p class="lead">산출 입력 탭의 카드 순서와 나머지 탭 순서로 설명합니다. 왼쪽 열은 용역·과업·건축물, 오른쪽 열은 요율·직접경비·보정·선택과업·합계입니다.</p>
+<h3 id="s3-1">3-1. 용역 정보</h3>
+<figure class="shot" id="fig-s03_project"><div class="frame"><img src="images/s03_project.webp" width="526" height="278" loading="lazy" alt="용역 정보 카드"><span class="pin" style="left:4.01%;top:34.61%">1</span><span class="pin" style="left:4.01%;top:57.63%">2</span><span class="pin" style="left:51.35%;top:57.63%">3</span><span class="pin" style="left:4.01%;top:80.66%">4</span><span class="pin" style="left:68.27%;top:81.38%">5</span></div><figcaption><span class="fno">S03</span>용역 정보 카드</figcaption><ol class="legend"><li><b>1</b><span>용역명 — 산출서 「용 역 명」</span></li><li><b>2</b><span>관리주체(발주처)</span></li><li><b>3</b><span>위치</span></li><li><b>4</b><span>작성자 — 산출서 서명란</span></li><li><b>5</b><span>작성일 — 산출서 날짜(처음 열 때 오늘 날짜) · 경과년수 계산 기준 연도</span></li></ol></figure>
+<p>작성일만 금액에 영향을 줍니다. 작성일의 연도에서 사용승인연도를 빼 경과년수를 구하기 때문입니다(<a href="#s4-9">4-9</a>). 나머지 칸은 산출서에만 들어갑니다.</p>
+<h3 id="s3-2">3-2. 과업 구분 · 노임단가</h3>
+<figure class="shot" id="fig-s04_task"><div class="frame"><img src="images/s04_task.webp" width="526" height="245" loading="lazy" alt="과업 구분 · 노임단가 카드"><span class="pin" style="left:4.01%;top:39.10%">1</span><span class="pin" style="left:4.01%;top:64.77%">2</span><span class="pin" style="left:51.35%;top:64.77%">3</span></div><figcaption><span class="fno">S04</span>과업 구분 · 노임단가 카드</figcaption><ol class="legend"><li><b>1</b><span>과업 구분 — 9종</span></li><li><b>2</b><span>고급기술자 노임단가(원/일) — 엔지니어링 노임단가</span></li><li><b>3</b><span>특별인부 시중노임(원/일) — 현지보조인부 노임에 쓰임</span></li></ol></figure>
+<div class="brk"><div class="k1"><div class="tbl"><table><thead><tr><th class="">과업</th><th class="">여비 인원</th><th class="">기계·기구손료율</th><th class="">인쇄비 기준(초기값)</th></tr></thead><tbody><tr><td class="">정기안전점검</td><td class="">2인</td><td class="">규정 없음(0%)</td><td class="">50쪽 · 10부 · 50,000원</td></tr><tr><td class="">정밀안전점검</td><td class="">8인</td><td class="">5%</td><td class="">300쪽 · 10부 · 360,000원</td></tr><tr><td class="">정밀안전진단</td><td class="">10인</td><td class="">10%</td><td class="">400쪽 · 20부 · 실비 입력</td></tr><tr><td class="">제1종성능평가 3종<br>(성능평가만 · 진단 포함 · 결과 활용)</td><td class="">10인</td><td class="">10%</td><td class="">실비 입력(포함형은 보고서 각각 계상)</td></tr><tr><td class="">제2종성능평가 3종<br>(성능평가만 · 점검 포함 · 결과 활용)</td><td class="">8인</td><td class="">5%</td><td class="">실비 입력(포함형은 보고서 각각 계상)</td></tr></tbody></table></div></div></div>
+<ul><li>과업을 바꾸면 기계·기구손료율과 보고서 인쇄비가 위 표의 값으로 다시 들어갑니다. 바꾼 뒤 필요하면 직접 고칩니다.</li>
+<li>노임단가 두 칸은 고칠 수 있습니다. 견적 전에 최신 공표값인지 확인하십시오(<a href="#s4-12">4-12</a>).</li></ul>
+<h3 id="s3-3">3-3. 대상 건축물 (동별)</h3>
+<figure class="shot" id="fig-s05_bld"><div class="frame"><img src="images/s05_bld.webp" width="526" height="433" loading="lazy" alt="대상 건축물 카드 — 예제 A"><span class="pin" style="left:7.05%;top:31.05%">1</span><span class="pin" style="left:51.54%;top:31.05%">2</span><span class="pin" style="left:7.05%;top:45.14%">3</span><span class="pin" style="left:51.54%;top:45.14%">4</span><span class="pin" style="left:7.05%;top:59.00%">5</span><span class="pin" style="left:51.54%;top:59.00%">6</span><span class="pin" style="left:7.05%;top:68.93%">7</span><span class="pin" style="left:4.01%;top:80.25%">8</span><span class="pin" style="left:4.01%;top:90.64%">9</span></div><figcaption><span class="fno">S05</span>대상 건축물 카드 — 예제 A</figcaption><ol class="legend"><li><b>1</b><span>동 명칭</span></li><li><b>2</b><span>연면적(㎡) — 동당 연면적</span></li><li><b>3</b><span>구조형식 — 7종(괄호 안 조정비)</span></li><li><b>4</b><span>용도 — 5종(괄호 안 조정비)</span></li><li><b>5</b><span>사용승인연도 — 경과년수 보정</span></li><li><b>6</b><span>전차보고서 — 제공 여부에 따른 보정</span></li><li><b>7</b><span>동별 미리 계산 — 기준인원 · 조정비 · 경과년수 보정</span></li><li><b>8</b><span>「＋ 동 추가」 — 2개동 이상</span></li><li><b>9</b><span>적용 인원 — 산정유형과 전체 · 외업 · 내업 인원</span></li></ol></figure>
+<ul>
+<li>연면적은 <b>동마다</b> 넣습니다. 기준인원수 표(별표 22)가 「동당 연면적별」이기 때문입니다.</li>
+<li>2개동 이상이면 「군집시설물 적용」 체크가 나타납니다. 같은 구역에서 걸어서 옮겨 다닐 수 있는 동들이면 체크한 채로 두고(별표 27 계수 적용), 떨어져 있으면 체크를 풀어 동마다 따로 산정합니다(<a href="#s4-6">4-6</a>).</li>
+<li>동을 지우려면 동 제목 오른쪽 「✕ 삭제」를 누릅니다(1개동만 남으면 사라짐).</li>
+</ul>
+<h3 id="s3-4">3-4. 산출 요율 설정</h3>
+<figure class="shot" id="fig-s06_rate"><div class="frame"><img src="images/s06_rate.webp" width="526" height="239" loading="lazy" alt="산출 요율 설정 카드"><span class="pin" style="left:6.67%;top:65.24%">1</span><span class="pin" style="left:6.67%;top:76.11%">2</span><span class="pin" style="left:54.20%;top:65.24%">3</span><span class="pin" style="left:54.20%;top:76.11%">4</span></div><figcaption><span class="fno">S06</span>산출 요율 설정 카드</figcaption><ol class="legend"><li><b>1</b><span>제경비율 — 110~120%, 1% 단위</span></li><li><b>2</b><span>제경비 계산 — 직접인건비 × 제경비율</span></li><li><b>3</b><span>기술료율 — 20~40%, 1% 단위</span></li><li><b>4</b><span>기술료 계산 — (직접인건비 + 제경비) × 기술료율</span></li></ol></figure>
+<h3 id="s3-5">3-5. 직접경비</h3>
+<figure class="shot" id="fig-s07_direct"><div class="frame"><img src="images/s07_direct.webp" width="526" height="700" loading="lazy" alt="직접경비 카드"><span class="pin" style="left:4.01%;top:18.08%">1</span><span class="pin" style="left:51.35%;top:18.08%">2</span><span class="pin" style="left:4.01%;top:29.54%">3</span><span class="pin" style="left:4.01%;top:45.43%">4</span><span class="pin" style="left:51.35%;top:45.43%">5</span><span class="pin" style="left:6.67%;top:81.34%">6</span><span class="pin" style="left:4.01%;top:90.34%">7</span><span class="pin" style="left:51.35%;top:90.34%">8</span></div><figcaption><span class="fno">S07</span>직접경비 카드</figcaption><ol class="legend"><li><b>1</b><span>철도 일반실 편도 운임 — 왕복 × 과업별 인원</span></li><li><b>2</b><span>일비 + 식비(원/인·일) — 외업 인원·일에 곱함</span></li><li><b>3</b><span>숙박(인·박) — 숙박이 있을 때만</span></li><li><b>4</b><span>외업 일수 — 비우면 외업인원 ÷ 4인 올림</span></li><li><b>5</b><span>차량 가격 · 운행 시간 · 휘발유 단가</span></li><li><b>6</b><span>위험수당률 — 10~20%</span></li><li><b>7</b><span>기계·기구손료율 — 과업별 자동</span></li><li><b>8</b><span>보고서 인쇄비 — 과업별 기준 실비</span></li></ol></figure>
+<p>여비·체재비·차량운행비·현지보조인부·위험수당·기계손료·인쇄비 7항목은 별표 25 산식으로 자동 계산됩니다. 사용자는 운임·숙박·차량 가격처럼 현장마다 다른 실비만 넣습니다. 계산식은 <a href="#s4-8">4-8</a>.</p>
+<h3 id="s3-6">3-6. 대가 보정</h3>
+<figure class="shot" id="fig-s08_corr"><div class="frame"><img src="images/s08_corr.webp" width="526" height="243" loading="lazy" alt="대가 보정 카드"><span class="pin" style="left:6.67%;top:64.17%">1</span><span class="pin" style="left:4.01%;top:82.69%">2</span></div><figcaption><span class="fno">S08</span>대가 보정 카드</figcaption><ol class="legend"><li><b>1</b><span>구조 복잡도 — −15% ~ +15%</span></li><li><b>2</b><span>적용 보정비 — 평균보정비(경과년수 × 전차보고서) × 복잡도</span></li></ol></figure>
+<p>경과년수와 전차보고서 보정은 동별 입력에서 자동으로 정해지고, 이 카드에서는 구조 복잡도만 정합니다. 보정비는 기본과업비 전체에 곱합니다(<a href="#s4-9">4-9</a>).</p>
+<h3 id="s3-7">3-7. 선택과업</h3>
+<figure class="shot" id="fig-s09_opt"><div class="frame"><img src="images/s09_opt.webp" width="526" height="505" loading="lazy" alt="선택과업 카드"><span class="pin" style="left:4.01%;top:21.20%">1</span><span class="pin" style="left:4.01%;top:40.01%">2</span><span class="pin" style="left:4.01%;top:68.74%">3</span><span class="pin" style="left:4.01%;top:92.09%">4</span></div><figcaption><span class="fno">S09</span>선택과업 카드</figcaption><ol class="legend"><li><b>1</b><span>실측도면 작성 — 정밀안전진단 대가의 10% 또는 20%</span></li><li><b>2</b><span>구조해석 · 내진성 평가 — 별표 26 제10호 · 제15호</span></li><li><b>3</b><span>그 밖의 선택과업 — 항목을 고르고 실비 입력(3행)</span></li><li><b>4</b><span>선택과업 건수 · 합계</span></li></ol></figure>
+<ul><li>실측도면은 설계도서·준공도서가 없을 때 고릅니다. 금액은 지금 과업과 관계없이 같은 건축물의 <b>정밀안전진단</b> 대가(보정 후)를 다시 계산해 10%·20%를 곱합니다.</li>
+<li>구조해석은 해석 대상 연면적(비우면 총 연면적)과 구조형식으로 고급기술자 인원을 정하고, 제경비·기술료율을 그대로 적용합니다(<a href="#s4-10">4-10</a>).</li></ul>
+<h3 id="s3-8">3-8. 합계 · 계약 확인</h3>
+<figure class="shot" id="fig-s10_total"><div class="frame"><img src="images/s10_total.webp" width="526" height="238" loading="lazy" alt="합계 · 계약 확인 카드"><span class="pin" style="left:4.01%;top:40.30%">1</span><span class="pin" style="left:51.35%;top:40.30%">2</span><span class="pin" style="left:4.01%;top:62.24%">3</span><span class="pin" style="left:4.01%;top:82.31%">4</span></div><figcaption><span class="fno">S10</span>합계 · 계약 확인 카드</figcaption><ol class="legend"><li><b>1</b><span>견적금액 절사 — 절사 안 함 · 천 원 · 만 원(초기값)</span></li><li><b>2</b><span>계약(예정) 공급가액 — 선택 입력</span></li><li><b>3</b><span>부가가치세(10%) 가산</span></li><li><b>4</b><span>70% 확인 — 계약 금액이 산정 대가의 몇 %인지</span></li></ol></figure>
+<p>계약(예정) 공급가액을 넣으면 산정 대가(공급가액)의 70% 미만인지 알려 줍니다. 정밀안전점검·정밀안전진단(과 이를 포함한 성능평가)은 70% 미만이면 국토안전관리원 평가 대상이라는 문구가 함께 표시됩니다(<a href="#s4-11">4-11</a>).</p>
+<h3 id="s3-9">3-9. 요약 스트립 · 견적금액</h3>
+<figure class="shot" id="fig-s11_banner"><div class="frame"><img src="images/s11_banner.webp" width="1440" height="218" loading="lazy" alt="요약 스트립과 견적금액 배너"><span class="pin" style="left:1.50%;top:3.00%">1</span><span class="pin" style="left:13.32%;top:29.56%">2</span><span class="pin" style="left:14.84%;top:82.48%">3</span><span class="pin" style="left:74.65%;top:71.03%">4</span><span class="pin" style="left:74.65%;top:86.60%">5</span></div><figcaption><span class="fno">S11</span>요약 스트립과 견적금액 배너</figcaption><ol class="legend"><li><b>1</b><span>요약 스트립 — 과업 · 연면적 · 적용인원 · 기본과업비 · 공급가액 · 견적금액</span></li><li><b>2</b><span>근거 안내</span></li><li><b>3</b><span>과업 · 동 수 · 연면적 합계 · VAT 포함 여부</span></li><li><b>4</b><span>견적금액(VAT 포함 · 절사)</span></li><li><b>5</b><span>공급가액(VAT 제외)</span></li></ol></figure>
+<h3 id="s3-10">3-10. 산출서 미리보기·출력</h3>
+<figure class="shot" id="fig-s12_a4"><div class="frame"><img src="images/s12_a4.webp" width="1440" height="900" loading="lazy" alt="산출서 미리보기 탭"><span class="pin" style="left:19.08%;top:26.49%">1</span><span class="pin" style="left:28.53%;top:26.49%">2</span><span class="pin" style="left:22.83%;top:37.69%">3</span></div><figcaption><span class="fno">S12</span>산출서 미리보기 탭</figcaption><ol class="legend"><li><b>1</b><span>「인쇄 / PDF 저장」 — 인쇄 창에서 대상을 「PDF로 저장」으로 고르면 PDF</span></li><li><b>2</b><span>「JPG 저장」 — A4 쪽마다 그림 파일</span></li><li><b>3</b><span>A4 안전점검등 대가 산출서 미리보기</span></li></ol></figure>
+<p>산출서는 내용에 따라 A4 2~3매입니다. 인쇄하면 쪽마다 머리·꼬리 선이 그려지고, 제출 문구·날짜·작성자와 꼬리말은 마지막 장 맨 아래에 붙습니다(v1.0.3). 표가 길어 마지막 장에 자리가 없으면 표 바로 아래에 이어서 나옵니다.</p>
+<h3 id="s3-11">3-11. A4 산출서 구성</h3>
+<div class="pair"><div>
+<figure class="shot" id="fig-s13_a4page"><div class="frame"><img src="images/s13_a4page.webp" width="794" height="1868" loading="lazy" alt="예제 A 산출서"><span class="pin" style="left:7.08%;top:6.96%">1</span><span class="pin" style="left:7.08%;top:18.95%">2</span><span class="pin" style="left:7.08%;top:42.34%">3</span><span class="pin" style="left:7.08%;top:52.16%">4</span><span class="pin" style="left:7.08%;top:60.35%">5</span><span class="pin" style="left:7.08%;top:76.50%">6</span><span class="pin" style="left:7.08%;top:84.52%">7</span><span class="pin" style="left:7.08%;top:90.90%">8</span></div><figcaption><span class="fno">S13</span>예제 A 산출서</figcaption><ol class="legend"><li><b>1</b><span>용역 개요 — 용역명 · 관리주체 · 위치 · 과업구분 · 산정방식 · 대상규모 · 노임단가</span></li><li><b>2</b><span>대가 총괄표 — 1~7 항목과 견적금액</span></li><li><b>3</b><span>산출근거 1 — 동별 기준인원수 · 조정비 · 계수 · 보간식 예시</span></li><li><b>4</b><span>산출근거 2 — 직접인건비 · 제경비 · 기술료</span></li><li><b>5</b><span>산출근거 3 — 직접경비 7항목</span></li><li><b>6</b><span>산출근거 4 — 동별 경과년수 · 전차보고서 보정</span></li><li><b>7</b><span>적용 법령 및 기준</span></li><li><b>8</b><span>제출 문구 · 날짜 · 작성자</span></li></ol></figure>
+</div><div>
+<figure class="shot" id="fig-s17_var_a4page"><div class="frame"><img src="images/s17_var_a4page.webp" width="794" height="2073" loading="lazy" alt="예제 B 산출서 — 견적금액 54,300,000원"><span class="pin" style="left:7.08%;top:39.44%">1</span><span class="pin" style="left:7.08%;top:60.15%">2</span></div><figcaption><span class="fno">S17</span>예제 B 산출서 — 견적금액 54,300,000원</figcaption><ol class="legend"><li><b>1</b><span>산출근거 1 — 가상 동과 계수 0.7</span></li><li><b>2</b><span>산출근거 3 — 여비 8인 · 차량 대수 · 외업 일수</span></li></ol></figure>
+</div></div>
+<p>선택과업이 있으면 「산출근거 5 — 선택과업」이 추가됩니다. 계약(예정) 금액을 넣었으면 70% 확인 결과가 법령 아래 비고에 들어갑니다.</p>
+<h3 id="s3-12">3-12. 법적 근거·기준표 탭</h3>
+<figure class="shot" id="fig-s14_reference"><div class="frame"><img src="images/s14_reference.webp" width="1068" height="824" loading="lazy" alt="법적 근거·기준표 탭"><span class="pin" style="left:1.50%;top:3.00%">1</span><span class="pin" style="left:51.15%;top:3.00%">2</span><span class="pin" style="left:1.50%;top:36.19%">3</span><span class="pin" style="left:1.50%;top:78.75%">4</span><span class="pin" style="left:51.15%;top:78.75%">5</span></div><figcaption><span class="fno">S14</span>법적 근거·기준표 탭</figcaption><ol class="legend"><li><b>1</b><span>법적 근거 — 시설물안전법 제37조 · 고시 제2026-444호</span></li><li><b>2</b><span>단가 기준 — 고급기술자 · 특별인부 · 체재비</span></li><li><b>3</b><span>별표 22 — 건축물 기준인원수(정밀진단 · 정밀점검 · 정기점검)</span></li><li><b>4</b><span>별표 23 — 구조형식 · 용도 조정비</span></li><li><b>5</b><span>제62조 — 경과년수 · 전차보고서 · 복잡도 보정</span></li></ol></figure>
+<h3 id="s3-13">3-13. 계산식 안내 창</h3>
+<p>오른쪽 아래 「계산식 안내」 버튼을 누르면 「안전점검등 대가 산출 가이드」 창이 열립니다. 탭 4개로 이용방법, 산정 구조, 보간·군집, 핵심 주의사항을 볼 수 있습니다. 닫을 때는 ✕, 창 바깥, 또는 Esc를 누릅니다.</p>
+<figure class="shot" id="fig-s18_help_howto"><div class="frame"><img src="images/s18_help_howto.webp" width="820" height="868" loading="lazy" alt="산출 가이드 — 이용방법"><span class="pin" style="left:2.84%;top:8.86%">1</span><span class="pin" style="left:14.06%;top:8.86%">2</span><span class="pin" style="left:23.29%;top:8.86%">3</span><span class="pin" style="left:33.23%;top:8.86%">4</span></div><figcaption><span class="fno">S18</span>산출 가이드 — 이용방법</figcaption><ol class="legend"><li><b>1</b><span>이용방법 — 5단계 사용 순서 · 주요 근거</span></li><li><b>2</b><span>산정 구조 — 대가 구성 · 항목별 산식 · 직접경비</span></li><li><b>3</b><span>보간 · 군집 — 별표 24 보간식 · 별표 27 군집 3유형</span></li><li><b>4</b><span>핵심 주의사항 — 70% 계약 · 노임단가 · 보정 범위 · 용도</span></li></ol></figure>
+<div class="pair"><div><figure class="shot" id="fig-s19_help_method"><div class="frame"><img src="images/s19_help_method.webp" width="820" height="868" loading="lazy" alt="산정 구조"></div><figcaption><span class="fno">S19</span>산정 구조</figcaption></figure></div><div><figure class="shot" id="fig-s20_help_formula"><div class="frame"><img src="images/s20_help_formula.webp" width="820" height="605" loading="lazy" alt="보간 · 군집"></div><figcaption><span class="fno">S20</span>보간 · 군집</figcaption></figure></div></div>
+<figure class="shot" id="fig-s21_help_caution"><div class="frame"><img src="images/s21_help_caution.webp" width="820" height="657" loading="lazy" alt="핵심 주의사항"></div><figcaption><span class="fno">S21</span>핵심 주의사항</figcaption></figure>
+<h3 id="s3-14">3-14. 모바일</h3>
+<div class="tri"><div><figure class="shot narrow" id="fig-s22_mobile_main"><div class="frame"><img src="images/s22_mobile_main.webp" width="390" height="844" loading="lazy" alt="첫 화면"></div><figcaption><span class="fno">S22</span>첫 화면</figcaption></figure></div><div><figure class="shot narrow" id="fig-s23_mobile_input"><div class="frame"><img src="images/s23_mobile_input.webp" width="390" height="844" loading="lazy" alt="대상 건축물"></div><figcaption><span class="fno">S23</span>대상 건축물</figcaption></figure></div><div><figure class="shot narrow" id="fig-s24_mobile_a4"><div class="frame"><img src="images/s24_mobile_a4.webp" width="390" height="844" loading="lazy" alt="산출서 미리보기"></div><figcaption><span class="fno">S24</span>산출서 미리보기</figcaption></figure></div></div>
+<ul><li>휴대폰에서는 카드가 한 줄로 쌓입니다. 탭 막대는 좌우로 밀 수 있으며, 「📘 매뉴얼」은 오른쪽 끝에 있습니다.</li><li>산출서는 화면 폭에 맞춰 축소되어 보이고, 저장한 PDF·JPG는 A4 크기 그대로입니다.</li></ul>
+</section>
+<section class="ch" id="ch4"><h2><span class="n">04</span>기술기준 해설</h2>
+<p class="lead">프로그램이 따르는 고시 조항을 계산 순서대로 정리했습니다. 조문은 국가법령정보센터 원문(2026-11-09 조회)을 기준으로 했습니다.</p>
+<h3 id="s4-1">4-1. 근거 법령과 고시</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">조항</th><th class="">요지</th><th class="">법령</th></tr></thead><tbody><tr><td class="">시설물안전법 제37조</td><td class="">국토교통부장관은 안전점검등의 대행에 필요한 비용의 산정기준을 정하여 고시하여야 한다</td><td class="">시설물의 안전 및 유지관리에 관한 특별법(2026.8.28. 시행)</td></tr><tr><td class="">지침 제6장 제55조~제62조</td><td class="">안전점검등 및 성능평가 비용의 산정기준 — 정액적산방식, 기준인원수, 제경비, 기술료, 직접경비, 선택과업, 군집시설물, 보정</td><td class="">국토교통부고시 제2026-444호(2026.8.21. 시행)</td></tr><tr><td class="">지침 제63조</td><td class="">산정기준의 100분의 70 미만 도급계약의 평가</td><td class="">국토교통부고시 제2026-444호(2026.8.21. 시행)</td></tr><tr><td class="">별표 21~27</td><td class="">기준시설물 · 기준인원수 · 조정비 · 보간 · 직접경비 · 선택과업 · 군집시설물</td><td class="">국토교통부고시 제2026-444호(2026.8.21. 시행)</td></tr></tbody></table></div></div>
+<h3 id="s4-2">4-2. 대가의 구성 (제55조)</h3>
+<p>안전점검등의 대가는 기준인원수를 기초로 하는 <b>정액적산방식</b>으로 산정합니다.</p>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">구분</th><th class="">구성</th></tr></thead><tbody><tr><td class="">대가</td><td class="">기본과업비 + 선택과업비</td></tr><tr><td class="">기본과업비</td><td class="">직접인건비 + 제경비 + 기술료 + 직접경비</td></tr><tr><td class="">직접인건비</td><td class="">적용 인원수(기준인원수 × 조정비 × 군집 계수) × 고급기술자 노임단가</td></tr><tr><td class="">보정</td><td class="">기본과업비 × 보정비(경과년수 × 전차보고서 × 구조 복잡도)</td></tr></tbody></table></div></div>
+<h3 id="s4-3">4-3. 기준인원수 (별표 22)</h3>
+<p>건축물의 기준시설물은 <b>콘크리트구조 · 상업용</b>이고, 기준인원수는 <b>동당 연면적별</b>로 정해져 있습니다. 표의 값은 「전체 / 외업」 인원(고급기술자 기준)이며 내업인원수는 전체 − 외업입니다.</p>
+<div class="brk"><div class="tbl"><table><thead><tr><th class="">연면적</th><th class="">정밀안전진단</th><th class="">정밀안전점검</th><th class="">정기안전점검</th></tr></thead><tbody><tr><td class="">500㎡</td><td class="">–</td><td class="">–</td><td class="">3 / 2</td></tr><tr><td class="">1,000㎡</td><td class="">–</td><td class="">–</td><td class="">3 / 2</td></tr><tr><td class="">3,000㎡</td><td class="">–</td><td class="">–</td><td class="">4 / 2</td></tr><tr><td class="">5,000㎡</td><td class="">85 / 26</td><td class="">17 / 11</td><td class="">5 / 3</td></tr><tr><td class="">10,000㎡</td><td class="">93 / 31</td><td class="">18 / 12</td><td class="">6 / 4</td></tr><tr><td class="">30,000㎡</td><td class="">148 / 66</td><td class="">29 / 21</td><td class="">10 / 7</td></tr><tr><td class="">50,000㎡</td><td class="">205 / 102</td><td class="">39 / 29</td><td class="">14 / 9</td></tr><tr><td class="">100,000㎡</td><td class="">347 / 193</td><td class="">65 / 50</td><td class="">24 / 15</td></tr></tbody></table></div></div>
+<p>성능평가는 별표 22 제2호(제1종)·제3호(제2종)의 건축물 표(5,000~100,000㎡ 5개 기준점, 성능평가만 · 진단(점검) 포함 · 결과 활용 3가지)를 씁니다. 「–」 칸은 기준점이 아니므로 보간에 쓰지 않습니다.</p>
+<h3 id="s4-4">4-4. 보간 (별표 24 · 제56조④⑤)</h3>
+<p>규모가 기준점 사이에 있거나(B점), 최소규격보다 작거나(A점), 최대규격보다 크면(C점) 모두 다음 식을 씁니다.</p>
+<div class="svgbox" style="text-align:center;font:600 16px 'JetBrains Mono',monospace">y = y₁ + (y₂ − y₁) × (x − x₁) ÷ (x₂ − x₁)</div>
+<ul><li>x₁ · x₂는 인접한 작은 쪽 · 큰 쪽 기준점이며, <b>원점을 쓰면 안 됩니다</b>. 범위 밖이면 가장 가까운 끝의 두 점으로 외삽합니다.</li>
+<li>인원수는 소수 둘째 자리에서 반올림해 <b>소수 첫째 자리</b>까지, 조정비는 소수 넷째 자리에서 반올림해 <b>소수 셋째 자리</b>까지 씁니다.</li>
+<li>예) 정기안전점검 3,500㎡: 4 + (5 − 4) × (3,500 − 3,000) ÷ (5,000 − 3,000) = 4.25 → <b>4.3인</b>, 외업 2 + (3 − 2) × 0.25 = 2.25 → <b>2.3인</b>(예제 A).</li>
+<li>예) 정밀안전점검 3,000㎡(최소규격 5,000㎡보다 작음): 17 + (18 − 17) × (3,000 − 5,000) ÷ (10,000 − 5,000) = 16.6인(예제 B 본관동).</li></ul>
+<h3 id="s4-5">4-5. 조정비 (별표 23 다목)</h3>
+<div class="pair"><div><div class="tbl"><table><thead><tr><th class="">구조형식</th><th class="num">조정비</th></tr></thead><tbody><tr><td class="">철근콘크리트</td><td class="num">1.00</td></tr><tr><td class="">철골철근콘크리트</td><td class="num">1.00</td></tr><tr><td class="">철골조</td><td class="num">0.80</td></tr><tr><td class="">PC조</td><td class="num">1.00</td></tr><tr><td class="">특수구조</td><td class="num">1.30</td></tr><tr><td class="">목구조</td><td class="num">1.20</td></tr><tr><td class="">조적조</td><td class="num">0.90</td></tr></tbody></table></div></div>
+<div><div class="tbl"><table><thead><tr><th class="">용도</th><th class="num">조정비</th></tr></thead><tbody><tr><td class="">업무용</td><td class="num">1.00</td></tr><tr><td class="">상업용, 지하도상가</td><td class="num">1.00</td></tr><tr><td class="">주거용</td><td class="num">1.10</td></tr><tr><td class="">특수용</td><td class="num">1.20</td></tr><tr><td class="">경기장, 체육관</td><td class="num">1.20</td></tr></tbody></table></div></div></div>
+<p>동별 조정비 = 구조형식 조정비 × 용도 조정비(소수 셋째 자리). 적용 인원 = 기준인원수 × 조정비 × 군집 계수(소수 셋째 자리).</p>
+<h3 id="s4-6">4-6. 군집시설물 (별표 27 · 제61조제3호)</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">유형</th><th class="">전체인원수</th></tr></thead><tbody><tr><td class="">① 모두 1,000㎡ 미만</td><td class="">합계 연면적에 해당하는 인원수 × 1.0</td></tr><tr><td class="">② 모두 1,000㎡ 이상</td><td class="">최대 연면적 동 × 1.0 + 나머지 동별 인원수 × 0.7</td></tr><tr><td class="">③ 섞여 있음</td><td class="">1,000㎡ 미만 동은 합산해 가상 동 1개로 보고, 최대 연면적 동 × 1.0 + 나머지(가상 동 포함) × 0.7</td></tr></tbody></table></div></div>
+<ul><li>군집시설물은 같은 구역에서 걸어서 옮겨 다닐 수 있는 2개동 이상의 건축물입니다(지침 제2조제11호다목). 해당하지 않으면 「군집시설물 적용」 체크를 풀어 동마다 기본시설물(× 1.0)로 산정합니다.</li>
+<li>구조형식·용도가 다른 동을 합산하는 가상 동은 <b>면적 가중 평균조정비</b>(제56조⑥)를 씁니다.</li>
+<li>1,000㎡ 미만 동이 하나뿐이면 합산 없이 그 동을 그대로 씁니다.</li></ul>
+<h3 id="s4-7">4-7. 직접인건비 · 제경비 · 기술료 (제56조~제58조)</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">산식</th><th class="">끝수</th></tr></thead><tbody><tr><td class="">직접인건비</td><td class="">적용 인원(소수 셋째 자리) × 고급기술자 노임단가</td><td class="">원 미만 버림</td></tr><tr><td class="">제경비</td><td class="">직접인건비 × 110~120%</td><td class="">원 미만 버림</td></tr><tr><td class="">기술료</td><td class="">(직접인건비 + 제경비) × 20~40%</td><td class="">원 미만 버림</td></tr></tbody></table></div></div>
+<h3 id="s4-8">4-8. 직접경비 (제59조 · 별표 25)</h3>
+<div class="brk"><div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">산식</th></tr></thead><tbody><tr><td class="">여비</td><td class="">철도 일반실 운임 × 왕복 2 × 과업별 인원(정기 2 · 정밀점검·제2종 8 · 정밀진단·제1종 10인)</td></tr><tr><td class="">체재비</td><td class="">외업 인원·일 × (일비 + 식비) + 숙박 인·박 × 숙박비 — 공무원 여비 규정 별표 2 제2호</td></tr><tr><td class="">차량운행비</td><td class="">[차량가격 × 1,547×10⁻⁷(원/h, 반올림) × 운행시간 + 연료 10ℓ × 단가 + 잡품(연료비의 10%)] × 차량 대수 × 외업 일수 — 외업 4인 이내 1대</td></tr><tr><td class="">현지보조인부</td><td class="">외업 인원 × 40%(소수 셋째 자리) × 특별인부 시중노임</td></tr><tr><td class="">위험수당</td><td class="">현지 직접인건비(외업 인원 × 노임단가) × 10~20%</td></tr><tr><td class="">기계·기구손료</td><td class="">직접인건비(전체 기준) × 5%(정밀점검·제2종) · 10%(정밀진단·제1종) — 정기점검은 규정 없음</td></tr><tr><td class="">보고서 인쇄비</td><td class="">정기 50쪽 10부 · 정밀점검 300쪽 10부 · 정밀진단·성능평가 400쪽 20부 기준 실비 — 진단(점검) 포함 성능평가는 보고서 각각 계상</td></tr></tbody></table></div></div></div>
+<p>외업 일수를 비워 두면 외업 인원 ÷ 4인을 올림한 일수, 차량 대수는 외업 인원 ÷ 일수 ÷ 4인을 올림한 대수(최소 1대)를 씁니다.</p>
+<h3 id="s4-9">4-9. 대가 보정 (제62조)</h3>
+<div class="pair"><div><div class="tbl"><table><thead><tr><th class="">경과년수</th><th class="num">보정비</th></tr></thead><tbody><tr><td class="">15년 이내</td><td class="num">1.00</td></tr><tr><td class="">15년 초과 25년 이내</td><td class="num">1.05</td></tr><tr><td class="">25년 초과 35년 이내</td><td class="num">1.10</td></tr><tr><td class="">35년 초과 55년 이내</td><td class="num">1.15</td></tr><tr><td class="">55년 초과</td><td class="num">1.20</td></tr></tbody></table></div></div>
+<div><div class="tbl"><table><thead><tr><th class="">전차보고서</th><th class="num">보정비</th></tr></thead><tbody><tr><td class="">미제공</td><td class="num">1.00</td></tr><tr><td class="">보고서 또는 야장 CAD 1개 제공</td><td class="num">0.97</td></tr><tr><td class="">보고서 및 야장 CAD 동시 제공</td><td class="num">0.95</td></tr></tbody></table></div></div></div>
+<ul><li>경과년수 = 작성일 연도 − 사용승인연도. 연도를 비우면 1.00.</li>
+<li>동마다 경과년수 × 전차보고서 보정비를 구하고, 여러 동이면 <b>면적 가중 평균</b>(제62조제4호)을 냅니다.</li>
+<li>구조 복잡도(±15%)를 곱한 값이 적용 보정비이며, 기본과업비(제56조~제59조로 산출한 비용 전체)에 곱해 원 미만을 버립니다.</li></ul>
+<h3 id="s4-10">4-10. 선택과업 (제60조 · 별표 26)</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">산정</th></tr></thead><tbody><tr><td class="">실측도면 작성(제1호)</td><td class="">정밀안전진단 대가(보정 후) × 10%(기본도면) · 20%(기본도면 + 부재별 상세구조도)</td></tr><tr><td class="">구조해석(제10호 (3) 건축물)</td><td class="">RC·벽식·S조·SRC조 7(5,000㎡ 이하) · 8 · 11 · 14 · 21인 / PC조·주상복합 11 · 12 · 16 · 21 · 32인 / 특수구조 14 · 16 · 22 · 27 · 42인(5천 · 1만 · 3만 · 5만 · 10만㎡ 보간) × 노임단가 + 제경비 + 기술료</td></tr><tr><td class="">내진성 평가(제15호)</td><td class="">간략 내진해석 = 구조해석 × 2.0 · 정밀 내진해석 = 구조해석 × 2.5~3.0</td></tr><tr><td class="">그 밖의 선택과업</td><td class="">지질·지반조사, 재료시험, 가설재, 비파괴재하시험, 전문가 자문, 마감재 해체·복구 등 — 실비(제55조③)</td></tr></tbody></table></div></div>
+<h3 id="s4-11">4-11. 70% 기준 (제63조제4호)</h3>
+<p>산정기준의 100분의 70 미만 금액으로 도급계약하면 정밀안전점검·정밀안전진단 실시결과가 국토안전관리원의 평가 대상이 됩니다. 프로그램은 공급가액의 70%(원 미만 올림)와 계약(예정) 공급가액을 비교합니다.</p>
+<h3 id="s4-12">4-12. 노임단가</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">구분</th><th class="">단가</th><th class="">공표</th><th class="">쓰이는 곳</th></tr></thead><tbody><tr><td class="">고급기술자 (엔지니어링 노임단가)</td><td class="">310,884원/일</td><td class="">한국엔지니어링협회 공표 · 2026.1.1. 적용</td><td class="">직접인건비 · 위험수당 · 구조해석</td></tr><tr><td class="">특별인부 (시중노임단가)</td><td class="">228,717원/일</td><td class="">대한건설협회 2026년 하반기 · 2026.9.1. 적용 · 직종번호 1003</td><td class="">현지보조인부</td></tr></tbody></table></div></div>
+<p>시중노임단가는 해마다 1월·9월에 공표됩니다. 다음 공표값이 나오면 입력칸을 고치거나 새 버전을 쓰십시오.</p>
+<h3 id="s4-13">4-13. 반올림·절사 정리</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">대상</th><th class="">처리</th></tr></thead><tbody><tr><td class="">기준인원수(보간)</td><td class="">소수 첫째 자리(둘째 자리 반올림) — 제56조④</td></tr><tr><td class="">조정비 · 평균조정비 · 보정비</td><td class="">소수 셋째 자리(넷째 자리 반올림) — 제56조⑤</td></tr><tr><td class="">적용 인원 · 보조인부 인원</td><td class="">소수 셋째 자리</td></tr><tr><td class="">금액</td><td class="">항목마다 원 미만 버림</td></tr><tr><td class="">견적금액</td><td class="">공급가액 + 부가가치세를 선택한 단위(절사 안 함 · 천 원 · 만 원) 미만 버림</td></tr></tbody></table></div></div>
+<div class="note"><b>계산 검증</b>고시 원문의 별표 22(48칸) · 별표 23 · 별표 26 제10호(3) · 제62조 표와 앱 상수가 같은지 대조하고, 과업 9종 · 1~5개동 · 군집 3유형을 섞은 무작위 입력 800건을 분수 계산으로 따로 다시 계산해 앱 결과 24개 항목과 모두 같음을 확인했습니다(verify_sif_calc.py, 2026-11-09).</div>
+<h3 id="s4-14">4-14. 프로그램이 다루지 않는 것</h3>
+<ul><li>건축물 외의 시설물(교량 · 터널 · 항만 · 댐 · 하천 · 수도 · 옹벽 · 절토사면) — 별표 22의 다른 표를 씁니다.</li>
+<li>긴급안전점검 — 과업 목록에 없습니다.</li>
+<li>실시 대상 · 시기 판정, 수행기관 등록 요건.</li></ul>
+<div class="warn"><b>확인</b>고시와 노임단가는 바뀔 수 있습니다. 계약 전에 국가법령정보센터에서 현행 고시 번호를, 한국엔지니어링협회 · 대한건설협회 공표 자료에서 적용 단가를 다시 확인하십시오.</div>
+</section>
+<section class="ch" id="ch5"><h2><span class="n">05</span>실무 작업 방법</h2>
+<h3 id="s5-1">5-1. 단계별 절차</h3>
+<ol class="steps">
+<li><b class="t">자료 모으기</b>건축물대장(동별 연면적 · 구조 · 용도 · 사용승인일), 전차 점검·진단 보고서와 야장 CAD 보유 여부, 설계도서 보유 여부.</li>
+<li><b class="t">과업 · 동 구성</b>과업을 고르고 동을 모두 넣습니다. 같은 구역의 여러 동이면 군집시설물 적용 여부를 정합니다.</li>
+<li><b class="t">현장 실비</b>철도 운임(가장 가까운 역 기준 일반실), 숙박 필요 여부, 차량, 인쇄 쪽수·부수를 현장에 맞게 넣습니다.</li>
+<li><b class="t">보정 · 선택과업</b>구조가 복잡하거나 단순하면 복잡도를 정하고, 도면이 없거나 구조해석이 필요하면 선택과업을 고릅니다.</li>
+<li><b class="t">계약 금액 확인</b>계약(예정) 공급가액을 넣어 70% 기준을 확인합니다.</li>
+<li><b class="t">산출서 제출</b>PDF로 저장해 견적서 · 내역서와 함께 제출합니다.</li>
+</ol>
+<h3 id="s5-2">5-2. 제출 전 확인</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">확인</th></tr></thead><tbody><tr><td class="">작성일</td><td class="">경과년수 보정 기준 연도가 맞는가</td></tr><tr><td class="">노임단가</td><td class="">고급기술자 · 특별인부가 적용 시점의 공표값인가</td></tr><tr><td class="">연면적</td><td class="">동당 연면적인가(전체 합계를 한 동에 넣지 않았는가)</td></tr><tr><td class="">군집</td><td class="">떨어진 동에 군집 계수를 적용하지 않았는가</td></tr><tr><td class="">인쇄비</td><td class="">성능평가에 진단(점검) 보고서를 포함하면 각각 계상했는가</td></tr><tr><td class="">VAT · 절사</td><td class="">제출처가 요구하는 부가가치세 포함 여부와 절사 단위인가</td></tr></tbody></table></div></div>
+<h3 id="s5-3">5-3. 예제 B — 정밀안전점검 · 군집 5개동</h3>
+<p>같은 구역의 5개동(3,000 · 1,500 · 1,500 · 700 · 500㎡, 모두 철근콘크리트 · 업무용 · 2008년)을 정밀안전점검으로 산정한 예입니다. 1,000㎡ 미만 2개동이 섞여 있어 <b>군집 ③ 1,000㎡ 미만 · 이상 혼재</b>으로 판정됩니다.</p>
+<figure class="shot" id="fig-s15_var_input"><div class="frame"><img src="images/s15_var_input.webp" width="1440" height="900" loading="lazy" alt="예제 B 입력 화면"><span class="pin" style="left:1.50%;top:18.82%">1</span><span class="pin" style="left:13.32%;top:33.86%">2</span><span class="pin" style="left:13.32%;top:96.00%">3</span></div><figcaption><span class="fno">S15</span>예제 B 입력 화면</figcaption><ol class="legend"><li><b>1</b><span>요약 스트립</span></li><li><b>2</b><span>견적금액</span></li><li><b>3</b><span>5개동 입력</span></li></ol></figure>
+<figure class="shot narrow" id="fig-s16_var_bld"><div class="frame"><img src="images/s16_var_bld.webp" width="526" height="1619" loading="lazy" alt="예제 B 동별 입력"><span class="pin" style="left:7.05%;top:19.52%">1</span><span class="pin" style="left:7.05%;top:70.66%">2</span><span class="pin" style="left:7.05%;top:87.71%">3</span><span class="pin" style="left:4.01%;top:93.64%">4</span><span class="pin" style="left:4.01%;top:96.00%">5</span></div><figcaption><span class="fno">S16</span>예제 B 동별 입력</figcaption><ol class="legend"><li><b>1</b><span>본관동 3,000㎡ — 기준 16.6 / 외업 10.6인</span></li><li><b>2</b><span>창고동 700㎡</span></li><li><b>3</b><span>경비동 500㎡</span></li><li><b>4</b><span>군집시설물 적용</span></li><li><b>5</b><span>군집 ③ 적용 인원</span></li></ol></figure>
+<div class="brk"><div class="tbl"><table><thead><tr><th class="">동</th><th class="">연면적(㎡)</th><th class="">기준 전체/외업(인)</th><th class="">조정비</th><th class="">계수</th><th class="">적용 전체/외업(인)</th></tr></thead><tbody><tr><td class="">본관동</td><td class="">3,000</td><td class="">16.6 / 10.6</td><td class="">1.000</td><td class="">1.0</td><td class="">16.600 / 10.600</td></tr><tr><td class="">별관동</td><td class="">1,500</td><td class="">16.3 / 10.3</td><td class="">1.000</td><td class="">0.7</td><td class="">11.410 / 7.210</td></tr><tr><td class="">교육동</td><td class="">1,500</td><td class="">16.3 / 10.3</td><td class="">1.000</td><td class="">0.7</td><td class="">11.410 / 7.210</td></tr><tr><td class="">가상 동(창고동 · 경비동)</td><td class="">1,200</td><td class="">16.2 / 10.2</td><td class="">1.000</td><td class="">0.7</td><td class="">11.340 / 7.140</td></tr><tr><td class="">합계</td><td class="">7,200</td><td class=""></td><td class=""></td><td class=""></td><td class="">50.760 / 32.160</td></tr></tbody></table></div></div>
+<p>창고동 700㎡와 경비동 500㎡를 합한 가상 동 1,200㎡를 하나의 동으로 보고, 최대 연면적인 본관동만 × 1.0, 나머지 3개(별관동 · 교육동 · 가상 동)는 × 0.7을 곱했습니다.</p>
+<div class="tbl"><table><thead><tr><th class="">항목</th><th class="">예제 B 계산</th><th class="num">금액(원)</th></tr></thead><tbody><tr><td class="">1. 직접인건비</td><td class="">50.760인 × 310,884원</td><td class="num">15,780,471</td></tr><tr><td class="">2. 제경비</td><td class="">× 110%</td><td class="num">17,358,518</td></tr><tr><td class="">3. 기술료</td><td class="">× 20%</td><td class="num">6,627,797</td></tr><tr><td class="">4. 직접경비</td><td class="">여비 25,000 × 2 × 8인 = 400,000 · 외업 9일 · 차량 1대 · 기계손료 5% 등</td><td class="num">7,251,563</td></tr><tr><td class="">기본과업비(보정 전)</td><td class="">1 + 2 + 3 + 4</td><td class="num">47,018,349</td></tr><tr><td class="">5. 대가 보정</td><td class="">× 1.050</td><td class="num">2,350,917</td></tr><tr><td class="">공급가액</td><td class="">기본과업비(보정 후)</td><td class="num">49,369,266</td></tr><tr><td class="">7. 부가가치세</td><td class="">× 10%</td><td class="num">4,936,926</td></tr><tr><td class="">견적금액</td><td class="">만 원 미만 절사</td><td class="num">54,300,000</td></tr></tbody></table></div>
+</section>
+<section class="ch" id="ch6"><h2><span class="n">06</span>문제 해결·FAQ</h2>
+<div class="brk"><div class="k1"><div class="tbl"><table><thead><tr><th class="">증상</th><th class="">해결</th></tr></thead><tbody><tr><td class="">견적금액이 0원이다</td><td class="">연면적이 비어 있거나 고급기술자 노임단가가 0입니다. 동별 미리 계산 칸에 「연면적을 입력하세요」가 보이면 연면적을 넣습니다.</td></tr><tr><td class="">정밀안전점검인데 3,000㎡ 인원이 이상하다</td><td class="">정밀점검 · 정밀진단 표는 5,000㎡부터 있어서 그보다 작으면 5,000 · 10,000㎡ 두 점으로 외삽합니다(별표 24 A점). 고시가 정한 방식입니다.</td></tr><tr><td class="">군집 체크가 안 보인다</td><td class="">2개동 이상일 때만 나타납니다. 「＋ 동 추가」로 동을 늘리십시오.</td></tr><tr><td class="">예제와 보정비가 다르다</td><td class="">작성일 연도가 바뀌면 경과년수가 달라집니다. 예제는 2026년 기준입니다.</td></tr><tr><td class="">과업을 바꿨더니 인쇄비가 바뀌었다</td><td class="">과업을 바꾸면 기계·기구손료율과 인쇄비가 별표 25 기준값으로 다시 들어갑니다. 직접 고친 값이 있었다면 다시 넣으십시오.</td></tr><tr><td class="">인쇄하면 서명란 위가 비어 있다</td><td class="">마지막 장의 남는 공간을 비우고 제출 문구 · 작성자를 맨 아래에 붙이기 때문입니다(정상).</td></tr><tr><td class="">매뉴얼이 안 열린다</td><td class="">매뉴얼은 인터넷 연결이 필요합니다. 오프라인이면 「매뉴얼은 인터넷 연결 시 열립니다」가 표시됩니다.</td></tr><tr><td class="">예전 화면이 보인다</td><td class="">새로 고침(Ctrl+F5) 하거나, 설치한 앱이면 한 번 닫았다가 다시 엽니다.</td></tr></tbody></table></div></div></div>
+</section>
+<section class="ch" id="ch7"><h2><span class="n">A</span>부록</h2>
+<h3 id="a1">A1. 예제 입력값</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">예제 A(초기값)</th><th class="">예제 B</th></tr></thead><tbody><tr><td class="">용역명</td><td class="">만민빌딩 2026년 하반기 정기안전점검</td><td class="">만민캠퍼스 2026년 정밀안전점검</td></tr><tr><td class="">과업</td><td class="">정기안전점검</td><td class="">정밀안전점검</td></tr><tr><td class="">동</td><td class="">본관동 3,500㎡ · 철근콘크리트 · 업무용 · 2008년 · 전차 미제공</td><td class="">3,000 · 1,500 · 1,500 · 700 · 500㎡ · 같은 조건 · 군집 적용</td></tr><tr><td class="">노임단가</td><td class="">310,884 / 228,717</td><td class="">같음</td></tr><tr><td class="">제경비 / 기술료 / 위험수당</td><td class="">110% / 20% / 10%</td><td class="">같음</td></tr><tr><td class="">철도 운임(편도)</td><td class="">0</td><td class="">25,000</td></tr><tr><td class="">일비+식비 / 숙박</td><td class="">50,000 / 0박</td><td class="">같음</td></tr><tr><td class="">기계손료 / 인쇄비</td><td class="">0% / 50,000</td><td class="">5% / 360,000</td></tr><tr><td class="">복잡도 · 선택과업</td><td class="">0% · 없음</td><td class="">같음</td></tr><tr><td class="">절사 · VAT</td><td class="">만 원 · 포함</td><td class="">같음</td></tr><tr><td class="">공급가액</td><td class="">4,024,237원</td><td class="">49,369,266원</td></tr><tr><td class="">견적금액</td><td class=""><b>4,420,000원</b></td><td class=""><b>54,300,000원</b></td></tr></tbody></table></div></div>
+<h3 id="a2">A2. 버전 변경 내역</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">버전</th><th class="">내용</th></tr></thead><tbody><tr><td class="">Ver-1.0 · v1.0.4 (2026-11-09)</td><td class="">사용자 매뉴얼 연결 — 탭 막대 「📘 매뉴얼」, 매뉴얼 웹 · PDF 공개</td></tr><tr><td class="">Ver-1.0 · v1.0.3 (2026-11-09)</td><td class="">인쇄 — 제출 문구 · 날짜 · 작성자와 꼬리말을 마지막 장 맨 아래에 붙임</td></tr><tr><td class="">Ver-1.0 · v1.0.2 (2026-11-09)</td><td class="">특별인부 시중노임 2026 하반기 228,717원 적용</td></tr><tr><td class="">Ver-1.0 · v1.0.0~v1.0.1 (2026-11-09)</td><td class="">첫 공개(고시 제2026-444호 · 과업 9종 · 군집 · 보정 · 선택과업) · A4 인쇄 쪽마다 머리 · 꼬리 선</td></tr></tbody></table></div></div>
+<h3 id="a3">A3. 용어</h3>
+<div class="brk"><div class="k1"><div class="tbl"><table><thead><tr><th class="">용어</th><th class="">뜻</th></tr></thead><tbody><tr><td class="">안전점검등</td><td class="">정기안전점검 · 정밀안전점검 · 긴급안전점검 · 정밀안전진단을 아우르는 말</td></tr><tr><td class="">정액적산방식</td><td class="">기준인원수를 기초로 직접인건비를 정하고 제경비 · 기술료 · 직접경비를 더하는 대가 산정 방식(제55조)</td></tr><tr><td class="">기준시설물</td><td class="">기준인원수를 정한 표준 규격 — 건축물은 콘크리트구조 · 상업용(별표 21)</td></tr><tr><td class="">기준인원수</td><td class="">기준시설물의 과업 수행에 드는 고급기술자 인원(전체 / 외업)</td></tr><tr><td class="">외업 · 내업</td><td class="">현장 조사 인원 / 사무실 분석 · 보고서 인원(내업 = 전체 − 외업)</td></tr><tr><td class="">조정비</td><td class="">구조형식 · 용도가 기준시설물과 다를 때 곱하는 비율(별표 23)</td></tr><tr><td class="">군집시설물</td><td class="">같은 구역에서 걸어서 옮겨 다닐 수 있는 2개동 이상의 시설물(별표 27)</td></tr><tr><td class="">가상 동</td><td class="">군집에서 1,000㎡ 미만 동을 합산해 하나로 본 동</td></tr><tr><td class="">보정비</td><td class="">경과년수 · 전차보고서 · 구조 복잡도에 따른 대가 조정 비율(제62조)</td></tr><tr><td class="">선택과업</td><td class="">기본과업 외에 필요에 따라 추가하는 과업(제60조 · 별표 26)</td></tr><tr><td class="">공급가액</td><td class="">부가가치세를 더하기 전 금액</td></tr></tbody></table></div></div></div>
+</section></main></div>
+<footer class="foot">© 2026 김만민 건축사 · ㈜대성건축사사무소 · 안전점검등 대가 산출기 사용자 매뉴얼 Ver-1.0 · 시설물안전법 제37조 · 국토교통부고시 제2026-444호(2026.8.21. 시행) 제55조~제62조 <span class="rev">· 화면 대응 개정 2026-10-12</span> <span class="rev">· 디자인 개정 2026-10-26</span></footer>
+<div class="pfoot"><span>안전점검등 대가 산출기 사용자 매뉴얼 Ver-1.0</span><span>2026-11-09</span></div>
+<div id="lb" role="dialog" aria-label="그림 확대"><img alt=""></div>
+<button class="totop" aria-label="맨 위로">↑</button>
+<script>
+(function(){
+  var lb=document.getElementById('lb'),li=lb.querySelector('img');
+  document.querySelectorAll('figure.shot .frame').forEach(function(f){f.addEventListener('click',function(){li.src=f.querySelector('img').src;li.alt=f.querySelector('img').alt;lb.classList.add('open');});});
+  lb.addEventListener('click',function(){lb.classList.remove('open');li.removeAttribute('src');});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});
+  document.querySelector('.totop').addEventListener('click',function(){window.scrollTo(0,0);});
+  var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'0px 0px -70% 0px'});
+    document.querySelectorAll('section.ch,h3[id]').forEach(function(s){io.observe(s);});
+  }
+})();
+/* 좁은 화면 표 쌓기 준비: 숫자 칸이 없는 표에 stack 표시, 각 칸에 머리글(data-th) 복사 */
+(function(){document.querySelectorAll('.tbl').forEach(function(t){var tb=t.querySelector('table');if(!tb||!tb.tHead)return;
+ if(tb.querySelector('td.num,th.num'))return;var hs=[].map.call(tb.tHead.rows[0].cells,function(c){return c.textContent.trim()});
+ [].forEach.call(tb.tBodies[0].rows,function(r){[].forEach.call(r.cells,function(c,i){if(hs[i])c.setAttribute('data-th',hs[i])})});t.classList.add('stack');if(hs.length===2)t.classList.add('c2')})})();
+/* v-mh1 D3 읽기 진행 막대 · D4 좁은 화면 목차 접힘 */
+(function(){var b=document.querySelector('.mh-prog i');if(b){var f=function(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;b.style.width=(m>0?h.scrollTop/m*100:0)+'%';};addEventListener('scroll',f,{passive:true});addEventListener('resize',f);f();}
+ var d=document.querySelector('nav.toc details'),mq=matchMedia('(max-width:1024px)');if(d){var s=function(){d.open=!mq.matches;};s();(mq.addEventListener?mq.addEventListener('change',s):mq.addListener(s));
+ d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(mq.matches)d.open=false;});});}})();
+</script>
+</body></html>

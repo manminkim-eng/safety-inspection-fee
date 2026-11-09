@@ -86,7 +86,7 @@ body{background:#f4f6f9;color:#1a2744;min-height:100vh;}
 .tab-bar{background:transparent;overflow-x:auto;scrollbar-width:none;}   /* 배경은 .hdr-shell 이 담당 */
 .tab-bar::-webkit-scrollbar{display:none;}
 .tab-bar-inner{max-width:1300px;margin:0 auto;padding:4px 24px 0;display:flex;}
-.tb.tb-manual{margin-left:auto;text-decoration:none;white-space:nowrap;}   /* v5.0.6 — 사용자 매뉴얼(탭 막대 오른쪽 끝 · 헤더 버튼 0개 규격 유지) */
+.tb.tb-manual{margin-left:auto;text-decoration:none;white-space:nowrap;}   /* v1.0.4 — 사용자 매뉴얼(탭 막대 오른쪽 끝 · 헤더 버튼 0개 규격 유지) */
 .tb{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.75);font-family:inherit;
   padding:11px 16px;font-size:13px;font-weight:700;letter-spacing:.02em;line-height:19px;
   border-bottom:3px solid transparent;   /* 11+19+11+3 = 44px */
@@ -812,6 +812,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
     <button class="tb tab-btn active" data-tab="input" onclick="switchTab('input')">📝 산출 입력</button>
     <button class="tb tab-btn" data-tab="result" onclick="switchTab('result')">📄 산출서 미리보기</button>
     <button class="tb tab-btn" data-tab="reference" onclick="switchTab('reference')">⚖️ 법적 근거·기준표</button>
+    <a class="tb tb-manual" href="https://manminkim-eng.github.io/safety-inspection-fee/manual/" target="_blank" rel="noopener" title="사용자 매뉴얼 (새 창)" onclick="if(navigator.onLine===false){event.preventDefault();mmToast('매뉴얼은 인터넷 연결 시 열립니다');}">📘 매뉴얼</a>
   </div>
 </nav>
 </div><!-- /.hdr-shell -->
