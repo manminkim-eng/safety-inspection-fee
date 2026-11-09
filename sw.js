@@ -21,7 +21,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const CACHE  = 'sifee-v1.0.1';   /* 2026-11-09 인쇄 — 각 장 상 · 하단 굵은 선 (종전 v1.0.0 신규) */
+const CACHE  = 'sifee-v1.0.2';   /* 2026-11-09 특별인부 228,717원(2026 하반기) (종전 v1.0.1 인쇄 굵은 선) */
 const ORPHAN = [];
 const ASSETS = [
   './',
