@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════════
-   안전점검등 대가 산출기 (건축물)  MANMIN Ver-1.0
+   v6.1.0 (2026-11-12) — 검색 설명 메타(description) 추가(정밀검토 B15 · 작업지시서 §25-6-75) · 판 6.1 · 캐시명 v6.1.0 (종전 sifee-v1.0.4)
+   안전점검등 대가 산출기 (건축물)  MANMIN Ver-6.1
    Service Worker — 오프라인 캐시 + 버전 업데이트
    ARCHITECT KIM MANMIN
 
@@ -21,7 +22,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const CACHE  = 'sifee-v1.0.4';   /* 2026-11-09 사용자 매뉴얼 연결 — 탭 막대 📘 매뉴얼(매뉴얼은 프리캐시 안 함) (종전 v1.0.3 인쇄 서명란 최하단) */
+const CACHE  = 'sifee-v6.1.0';   /* 2026-11-09 사용자 매뉴얼 연결 — 탭 막대 📘 매뉴얼(매뉴얼은 프리캐시 안 함) (종전 v1.0.3 인쇄 서명란 최하단) */
 const ORPHAN = [];
 const ASSETS = [
   './',
