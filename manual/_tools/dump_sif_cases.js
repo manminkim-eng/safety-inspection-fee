@@ -20,7 +20,10 @@ const FREEZE=`(()=>{const T=new Date(2026,10,9,10,0,0).getTime();const D=Date;cl
    BLD=Array.from({length:nb},(_,i)=>({nm:'동'+(i+1),area:areaOf(),st:ri(0,6),us:ri(0,4),yr:pick([0,ri(1955,2025)]),pv:ri(0,2)}));
    renderBld();
    set('task',task);onTaskChange();
-   set('rateHigh',pick([310884,ri(250000,400000)]).toLocaleString());set('rateHelper',pick([228717,ri(150000,300000)]).toLocaleString());
+   let wsel=null;
+   if(rnd()<0.5){/* v6.1.3~: 절반은 노임 적용연도 · 시중노임 반기 선택으로 */const ys=document.getElementById('wageYear'),hs=document.getElementById('wageHalf');
+    ys.value=pick([...ys.options].map(o=>o.value));wageSel('eng');if(rnd()<0.5){hs.value=pick([...hs.options].map(o=>o.value));wageSel('mkt');}wsel={y:ys.value,k:hs.value};}
+   else{set('rateHigh',pick([310884,ri(250000,400000)]).toLocaleString());set('rateHelper',pick([228717,ri(150000,300000)]).toLocaleString());}
    set('clusterOn',rnd()<0.7);
    set('overheadRate',ri(110,120));set('techFeeRate',ri(20,40));set('dangerRate',ri(10,20));
    set('fare',pick([0,ri(5000,60000)]).toLocaleString());set('perDiem',pick([50000,ri(20000,60000)]).toLocaleString());
@@ -35,6 +38,7 @@ const FREEZE=`(()=>{const T=new Date(2026,10,9,10,0,0).getTime();const D=Date;cl
    set('cutUnit',pick(['1','1000','10000']));set('includeVat',rnd()<0.8);
    recalc();
    const S=window._s,C=S.C;
+   if(wsel){window.__wc=window.__wc||{n:0,bad:[]};window.__wc.n++;const e=MM_WAGE.eng(wsel.y).high,m=MM_WAGE.mkt(wsel.k).helper;if(S.R!==e||S.opt.helperRate!==m)window.__wc.bad.push([wsel,S.R,S.opt.helperRate]);}
    const raw=id=>document.getElementById(id).value;
    res.push({in:{task,bld:BLD.map(b=>({...b})),R:S.R,helper:S.opt.helperRate,cluster:document.getElementById('clusterOn').checked,oR:S.opt.oR,tR:S.opt.tR,dR:S.opt.dR,mR:S.opt.mR,
      fare:S.opt.fare,perDiem:S.opt.perDiem,lodgeN:S.opt.lodgeN,lodgeRate:S.opt.lodgeRate,days:S.opt.days,carPrice:S.opt.carPrice,carHours:S.opt.carHours,fuel:S.opt.fuel,prt:S.opt.prt,
@@ -47,5 +51,5 @@ const FREEZE=`(()=>{const T=new Date(2026,10,9,10,0,0).getTime();const D=Date;cl
   return res;},N);
  const consts=await pg.evaluate(()=>({P_TBL,STRUCT,USE,PREV,ANA_TBL,TASK:Object.fromEntries(Object.entries(TASK).map(([k,v])=>[k,{trv:v.trv,mach:v.mach,prt:v.prt}])),CAR_K}));
  fs.writeFileSync(out,JSON.stringify({consts,cases,errs},null,0));
- console.log('cases',cases.length,'errs',errs.length);await b.close();s.close();
+ const wc=await pg.evaluate(()=>window.__wc||{n:0,bad:[]});console.log('cases',cases.length,'errs',errs.length,'wageSelect',wc.n,'wageMismatch',wc.bad.length,JSON.stringify(wc.bad.slice(0,3)));if(wc.bad.length)process.exitCode=1;await b.close();s.close();
 })();

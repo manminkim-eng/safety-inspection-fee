@@ -12,7 +12,7 @@ for f in sorted(glob.glob(raw+'/s*.png')): Image.open(f).convert('RGB').save(M+'
 shutil.copy(raw+'/_marks.json',M+'/images/_marks.json'); shutil.copy(raw+'/_example.json',M+'/_tools/_example.json')
 PY
 MANUAL_DIR="$M" "$PY" -X utf8 gen_manual_sif.py
-"$NODE" pdf_sif.js "$M" SIF_사용자매뉴얼_Ver-1.0.pdf "안전점검등 대가 산출기 사용자 매뉴얼 Ver-1.0"
+"$NODE" pdf_sif.js "$M" SIF_사용자매뉴얼_Ver-6.1.pdf "안전점검등 대가 산출기 사용자 매뉴얼 Ver-6.1"
 "$NODE" dump_sif_cases.js "$REPO" "$RAW/_cases.json" 800
 "$PY" -X utf8 verify_sif_calc.py "$RAW/_cases.json" ${SIF_SRC:+"$SIF_SRC"}
 "$PY" -X utf8 verify_manual.py "$REPO"
