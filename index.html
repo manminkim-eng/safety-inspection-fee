@@ -854,7 +854,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
       <!-- ── 탭 3: 주의사항 ── -->
       <div class="fml-panel" id="sec-caution">
         <div class="fml-sec-ttl">핵심 주의사항</div>
-        <div class="fml-card" style="border-left:3px solid #e63312;"><div class="fml-card-ttl" style="color:#e63312;">⚠️ 70% 미만 계약 — 평가 대상</div><div class="fml-note">산정기준의 100분의 70 미만 금액으로 도급계약하면 정밀안전점검 · 정밀안전진단 실시결과가 국토안전관리원의 평가 대상이 됩니다(지침 제63조제4호).</div></div>
+        <div class="fml-card" style="border-left:3px solid #e63312;"><div class="fml-card-ttl" style="color:#e63312;">⚠️ 70% 미만 계약 — 평가 대상</div><div class="fml-note">산정기준의 100분의 70 미만 금액으로 도급계약하면 정밀안전점검 · 정밀안전진단 실시결과가 국토안전관리원의 평가 대상이 됩니다(지침 제63조제4호). 단, 공동주택은 해당 대상 중 100분의 30 내외에서 평가할 수 있습니다(같은 호 단서).</div></div>
         <div class="fml-card" style="border-left:3px solid #785a28;margin-top:10px;"><div class="fml-card-ttl" style="color:#785a28;">📌 노임단가 · 시중노임은 매번 확인</div><div class="fml-note">「노임 적용연도」(엔지니어링협회 · 연 1회) · 「시중노임 반기」(대한건설협회 · 1월 · 9월 적용)를 고르면 입력칸이 채워집니다. 칸에서 직접 고칠 수도 있으며, 고치면 A4에 「직접 입력값」으로 적힙니다.</div></div>
         <div class="fml-card" style="border-left:3px solid #f97316;margin-top:10px;"><div class="fml-card-ttl" style="color:#c2410c;">🧮 보정은 기본과업비 전체에</div><div class="fml-note">제62조는 「제56조부터 제59조까지 산출한 비용」을 보정한다고 정합니다. 이 도구는 기본과업비(직접인건비 + 제경비 + 기술료 + 직접경비)에 보정비를 곱합니다.</div></div>
         <div class="fml-card" style="border-left:3px solid #2563eb;margin-top:10px;"><div class="fml-card-ttl" style="color:#1d4ed8;">🏫 용도 구분</div><div class="fml-note">별표 23 용도는 업무용 · 상업용(지하도상가) · 주거용 · 특수용 · 경기장(체육관) 다섯 가지입니다. 학교 · 공장 등은 용역 성격에 맞게 고르고, 산출서에 고른 값이 그대로 표기됩니다.</div></div>
@@ -1605,7 +1605,12 @@ function recalc(){
 
   /* ── 화면 갱신 ── */
   document.getElementById('fareHint').textContent=`왕복 × ${T.trv}인 (별표 25 제1호)`;
-  document.getElementById('machHint').textContent= T.mach? `별표 25 제5호 — ${T.nm.replace(/\(.*\)/,'')} ${T.mach}%` : '정기안전점검: 별표 25 규정 없음';
+  { /* v6.1.4 — 기계 · 기구손료율이 고시값(별표 25 제5호)과 다르면 붉게 알림(교차검증 M2) */
+    const mBase = T.mach? `별표 25 제5호 — ${T.nm.replace(/\(.*\)/,'')} ${T.mach}%` : '정기안전점검: 별표 25 규정 없음';
+    const mEl = document.getElementById('machHint'), mDiff = numOf('machRate')!==T.mach;
+    mEl.textContent = mDiff? `⚠️ 고시값 ${T.mach}%와 다름 — 협의 근거 필요 (${mBase})` : mBase;
+    mEl.style.color = mDiff? '#b91c1c' : '';
+  }
   document.getElementById('printHint').textContent=T.prtTxt+' 기준 실비';
   B.forEach((b,i)=>{});
   BLD.forEach((b,i)=>{
@@ -1622,7 +1627,7 @@ function recalc(){
   if(contract>0){
     const rt=sub>0?contract/sub*100:0;
     chk = contract<th70
-      ? `⚠️ 산정 대가의 ${rt.toFixed(1)}% — 70%(${fmt(th70)}원) 미만${T.eval?' · 국토안전관리원 평가 대상(지침 제63조제4호)':''}`
+      ? `⚠️ 산정 대가의 ${rt.toFixed(1)}% — 70%(${fmt(th70)}원) 미만${T.eval?' · 국토안전관리원 평가 대상(지침 제63조제4호 · 공동주택은 해당 대상 중 100분의 30 내외에서 평가)':''}`
       : `✓ 산정 대가의 ${rt.toFixed(1)}% — 70%(${fmt(th70)}원) 이상`;
   }
   document.getElementById('checkInfo').innerHTML=chk;
@@ -1719,7 +1724,7 @@ function renderResult(){
   let ck='· 최종 금액은 원 미만 절사 후 산출하였으며, 실제 계약 시 과업 범위 · 현장 조건에 따라 달라질 수 있습니다.';
   if(s.contract>0){
     const rt=s.sub>0?s.contract/s.sub*100:0;
-    ck = `· 계약(예정) 공급가액 ${fmt(s.contract)}원 = 산정 대가의 ${rt.toFixed(1)}% — `+(s.contract<s.th70? `<b style="color:#b91c1c;">70%(${fmt(s.th70)}원) 미만${s.T.eval?' · 국토안전관리원 평가 대상(지침 제63조제4호)':''}</b>` : `70%(${fmt(s.th70)}원) 이상`)+'<br>'+ck;
+    ck = `· 계약(예정) 공급가액 ${fmt(s.contract)}원 = 산정 대가의 ${rt.toFixed(1)}% — `+(s.contract<s.th70? `<b style="color:#b91c1c;">70%(${fmt(s.th70)}원) 미만${s.T.eval?' · 국토안전관리원 평가 대상(지침 제63조제4호 · 공동주택은 해당 대상 중 100분의 30 내외에서 평가)':''}</b>` : `70%(${fmt(s.th70)}원) 이상`)+'<br>'+ck;
   }
   document.getElementById('r-check').innerHTML=ck;
 }
